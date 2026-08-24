@@ -68,7 +68,7 @@
       (entries, observer) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          typeElement(entry.target, 180);
+          typeElement(entry.target, Number(entry.target.dataset.delay || 180));
           observer.unobserve(entry.target);
         });
       },
@@ -99,61 +99,47 @@
     }
   }
 
-  const music = document.getElementById("backgroundMusic");
-  const musicControl = document.getElementById("musicControl");
-  const musicLabel = document.getElementById("musicLabel");
+  const verticalTextItems = [...document.querySelectorAll("[data-vertical-text]")];
 
-  function updateMusicControl(isPlaying) {
-    musicControl.setAttribute("aria-pressed", String(isPlaying));
-    musicControl.setAttribute("aria-label", isPlaying ? "暂停背景音乐" : "播放背景音乐");
-    musicLabel.textContent = isPlaying ? "暂停音乐" : "播放音乐";
-    musicControl.classList.toggle("is-playing", isPlaying);
-  }
+  function prepareVerticalText(element, columnIndex) {
+    const completeText = element.textContent.trim();
+    element.setAttribute("aria-label", completeText);
 
-  async function playMusic(autoplayAttempt = false) {
-    try {
-      music.volume = 0.34;
-      await music.play();
-      updateMusicControl(true);
-      musicControl.classList.remove("needs-action");
-      return true;
-    } catch {
-      updateMusicControl(false);
-      if (autoplayAttempt) musicControl.classList.add("needs-action");
-      return false;
+    if (reducedMotion.matches) {
+      element.classList.add("is-flowing");
+      return;
+    }
+
+    const speed = Number(element.dataset.speed || 180);
+    let elapsed = columnIndex * 450;
+    element.textContent = "";
+
+    for (const character of completeText) {
+      const characterElement = document.createElement("i");
+      characterElement.textContent = character;
+      characterElement.setAttribute("aria-hidden", "true");
+      characterElement.style.setProperty("--character-delay", `${elapsed}ms`);
+      element.appendChild(characterElement);
+      elapsed += speed + (/[，。；：！？、·]/.test(character) ? 320 : 0);
     }
   }
 
-  if (music && musicControl) {
-    window.addEventListener("load", () => playMusic(true), { once: true });
+  verticalTextItems.forEach(prepareVerticalText);
 
-    musicControl.addEventListener("click", async () => {
-      musicControl.classList.remove("needs-action");
-      if (music.paused) await playMusic(false);
-      else {
-        music.pause();
-        updateMusicControl(false);
-      }
-    });
-
-    music.addEventListener("play", () => updateMusicControl(true));
-    music.addEventListener("pause", () => updateMusicControl(false));
-
-    document.addEventListener("visibilitychange", () => {
-      if (music.paused) return;
-      music.volume = document.hidden ? 0.12 : 0.34;
-    });
-  }
-
-  const details = document.getElementById("aboutDetails");
-  if (details) {
-    details.addEventListener("toggle", () => {
-      if (!details.open) return;
-      window.setTimeout(() => {
-        const firstParagraph = details.querySelector("p");
-        if (firstParagraph) firstParagraph.focus?.({ preventScroll: true });
-      }, 0);
-    });
+  if (verticalTextItems.length && !reducedMotion.matches && "IntersectionObserver" in window) {
+    const verticalObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.querySelectorAll("[data-vertical-text]").forEach((item) => item.classList.add("is-flowing"));
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.34 },
+    );
+    document.querySelectorAll(".vertical-showcase").forEach((showcase) => verticalObserver.observe(showcase));
+  } else {
+    verticalTextItems.forEach((item) => item.classList.add("is-flowing"));
   }
 
   const certificateDialog = document.getElementById("certificateDialog");
@@ -192,6 +178,7 @@
   }
 
   const qixiSection = document.getElementById("qixi");
+  const closingSection = document.getElementById("closing");
   const qixiFrame = document.getElementById("qixiFrame");
   const qixiIframe = document.getElementById("qixiIframe");
 
@@ -213,16 +200,106 @@
     );
     qixiLoadObserver.observe(qixiSection);
 
+    const visibleNightSections = new Set();
     const qixiViewObserver = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => body.classList.toggle("qixi-in-view", entry.isIntersecting));
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) visibleNightSections.add(entry.target);
+          else visibleNightSections.delete(entry.target);
+        });
+        body.classList.toggle("night-section-in-view", visibleNightSections.size > 0);
       },
       { threshold: 0.12 },
     );
     qixiViewObserver.observe(qixiSection);
+    if (closingSection) qixiViewObserver.observe(closingSection);
   } else {
     loadQixiFrame();
   }
+
+  const uptimeFields = {
+    days: document.querySelector('[data-uptime="days"]'),
+    hours: document.querySelector('[data-uptime="hours"]'),
+    minutes: document.querySelector('[data-uptime="minutes"]'),
+    seconds: document.querySelector('[data-uptime="seconds"]'),
+  };
+  const siteCreatedAt = new Date("2026-08-22T17:20:29+08:00").getTime();
+
+  function updateUptime() {
+    const elapsedSeconds = Math.max(0, Math.floor((Date.now() - siteCreatedAt) / 1000));
+    const days = Math.floor(elapsedSeconds / 86400);
+    const hours = Math.floor((elapsedSeconds % 86400) / 3600);
+    const minutes = Math.floor((elapsedSeconds % 3600) / 60);
+    const seconds = elapsedSeconds % 60;
+
+    if (uptimeFields.days) uptimeFields.days.textContent = String(days).padStart(3, "0");
+    if (uptimeFields.hours) uptimeFields.hours.textContent = String(hours).padStart(2, "0");
+    if (uptimeFields.minutes) uptimeFields.minutes.textContent = String(minutes).padStart(2, "0");
+    if (uptimeFields.seconds) uptimeFields.seconds.textContent = String(seconds).padStart(2, "0");
+  }
+
+  updateUptime();
+  window.setInterval(updateUptime, 1000);
+
+  const totalVisitors = document.getElementById("totalVisitors");
+  const todayPageviews = document.getElementById("todayPageviews");
+  const statsStatus = document.getElementById("statsStatus");
+
+  function getChinaDateKey(date = new Date()) {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone: "Asia/Shanghai",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).formatToParts(date);
+    const part = (type) => parts.find((item) => item.type === type)?.value || "00";
+    return `${part("year")}-${part("month")}-${part("day")}`;
+  }
+
+  async function readVisitCounter(action, key, options = {}) {
+    const endpoint = new URL(`https://counterapi.com/api/lixinyan-resume-2/${action}/${key}`);
+    Object.entries(options).forEach(([name, value]) => endpoint.searchParams.set(name, String(value)));
+
+    if (window.location.hostname !== "lixinyan1025-commits.github.io") {
+      endpoint.searchParams.set("readOnly", "true");
+    }
+
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), 7000);
+    try {
+      const response = await fetch(endpoint, { signal: controller.signal, mode: "cors" });
+      if (!response.ok) throw new Error(`Counter service returned ${response.status}`);
+      const result = await response.json();
+      if (!Number.isFinite(Number(result.value))) throw new Error("Counter response is invalid");
+      return Number(result.value);
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }
+
+  async function loadVisitStats() {
+    if (!totalVisitors || !todayPageviews || !statsStatus) return;
+
+    const results = await Promise.allSettled([
+      readVisitCounter("visitor", "home", { unique: true }),
+      readVisitCounter("view", getChinaDateKey()),
+    ]);
+    const [visitorResult, todayResult] = results;
+
+    if (visitorResult.status === "fulfilled") totalVisitors.textContent = visitorResult.value.toLocaleString("zh-CN");
+    else totalVisitors.textContent = "暂不可用";
+
+    if (todayResult.status === "fulfilled") todayPageviews.textContent = todayResult.value.toLocaleString("zh-CN");
+    else todayPageviews.textContent = "暂不可用";
+
+    const hasError = results.some((result) => result.status === "rejected");
+    statsStatus.textContent = hasError
+      ? "部分访问数据暂时无法连接，本站运行时间仍会正常记录。"
+      : "匿名计数 · 不收集姓名、电话或邮箱等个人信息";
+    statsStatus.classList.toggle("is-error", hasError);
+  }
+
+  loadVisitStats();
 
   const navLinks = [...document.querySelectorAll(".site-nav a")];
   const navSections = navLinks
@@ -248,25 +325,30 @@
   let liveLeaves = 0;
 
   function spawnLeaf(initial = false) {
-    if (!leafField || reducedMotion.matches || document.hidden || body.classList.contains("qixi-in-view")) return;
-    const maximum = window.innerWidth < 720 ? 6 : 10;
+    if (!leafField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
+    const isMobile = window.innerWidth < 720;
+    const maximum = isMobile ? 11 : 20;
     if (liveLeaves >= maximum) return;
 
     const leaf = document.createElement("i");
-    leaf.className = "floating-leaf";
-    const size = 9 + Math.random() * 10;
-    const duration = 14 + Math.random() * 8;
-    const drift = -70 + Math.random() * 140;
-    const colors = ["rgba(151, 172, 91, .78)", "rgba(191, 151, 78, .7)", "rgba(103, 145, 116, .7)"];
+    const isGolden = Math.random() < 0.3;
+    leaf.className = `floating-leaf ${isGolden ? "floating-leaf-gold" : "floating-leaf-bamboo"}`;
+    const size = 10 + Math.random() * 15;
+    const duration = 9 + Math.random() * 7;
+    const drift = -100 + Math.random() * 200;
+    const usesGutter = Math.random() < 0.7;
+    const startsLeft = Math.random() < 0.5;
+    const x = usesGutter
+      ? (startsLeft ? Math.random() * 18 : 82 + Math.random() * 18)
+      : 18 + Math.random() * 64;
 
-    leaf.style.setProperty("--leaf-x", `${Math.random() * 100}vw`);
+    leaf.style.setProperty("--leaf-x", `${x}vw`);
     leaf.style.setProperty("--leaf-size", `${size}px`);
     leaf.style.setProperty("--leaf-duration", `${duration}s`);
     leaf.style.setProperty("--leaf-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
     leaf.style.setProperty("--leaf-drift", `${drift}px`);
     leaf.style.setProperty("--leaf-return", `${drift * -0.45}px`);
-    leaf.style.setProperty("--leaf-opacity", `${0.28 + Math.random() * 0.28}`);
-    leaf.style.setProperty("--leaf-color", colors[Math.floor(Math.random() * colors.length)]);
+    leaf.style.setProperty("--leaf-opacity", `${0.5 + Math.random() * 0.3}`);
 
     leafField.appendChild(leaf);
     liveLeaves += 1;
@@ -277,8 +359,18 @@
   }
 
   if (!reducedMotion.matches) {
-    const initialCount = window.innerWidth < 720 ? 4 : 7;
+    const initialCount = window.innerWidth < 720 ? 8 : 14;
     for (let index = 0; index < initialCount; index += 1) spawnLeaf(true);
-    window.setInterval(() => spawnLeaf(false), window.innerWidth < 720 ? 4200 : 2500);
+
+    function scheduleLeaf() {
+      const isMobile = window.innerWidth < 720;
+      const delay = isMobile ? 1000 + Math.random() * 500 : 550 + Math.random() * 350;
+      window.setTimeout(() => {
+        spawnLeaf(false);
+        scheduleLeaf();
+      }, delay);
+    }
+
+    scheduleLeaf();
   }
 })();

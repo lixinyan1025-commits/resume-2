@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="李鑫炎的个人在线简历：关于我、AI 辅助作品与学习记录。" />
+    <meta name="description" content="李鑫炎的个人主页：关于我、兴趣与探索、AI 辅助作品及个人学习记录。" />
     <meta name="theme-color" content="#173d35" />
     <meta property="og:title" content="李鑫炎 · 个人主页" />
     <meta property="og:description" content="河师大 · 软院 · 26级新生" />
@@ -16,28 +16,20 @@
     <script src="script.js" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#about">跳到主要内容</a>
+    <a class="skip-link" href="#interests">跳到主要内容</a>
     <div class="leaf-field" aria-hidden="true"></div>
 
     <header class="site-header" aria-label="页面导航">
       <a class="site-mark" href="#top" aria-label="返回顶部">LXY</a>
       <nav class="site-nav">
-        <a href="#about">关于我</a>
+        <a href="#interests">兴趣与探索</a>
         <a href="#works">我的作品</a>
-        <a href="#learning">学习记录</a>
+        <a href="#learning">个人学习记录</a>
         <a href="#qixi">七夕展示</a>
+        <a href="#about">关于我</a>
         <a href="#contact">联系</a>
       </nav>
     </header>
-
-    <button class="music-control" id="musicControl" type="button" aria-pressed="false" aria-label="播放背景音乐">
-      <span class="music-disc" aria-hidden="true"><span></span></span>
-      <span class="music-copy">
-        <strong id="musicLabel">播放音乐</strong>
-        <small>《知了》· 陈默之</small>
-      </span>
-    </button>
-    <audio id="backgroundMusic" src="assets/media/zhiliao.mp3" preload="metadata" loop></audio>
 
     <section class="hero" id="top" aria-labelledby="hero-title">
       <video
@@ -52,88 +44,60 @@
       ></video>
       <div class="hero-overlay" aria-hidden="true"></div>
       <div class="hero-content">
-        <img class="hero-avatar" src="assets/images/avatar.webp" alt="李鑫炎使用的动漫头像" width="360" height="312" />
+        <div class="avatar-orbit">
+          <span class="orbit-track" aria-hidden="true"><i></i><i></i></span>
+          <img class="hero-avatar" src="assets/images/avatar.webp" alt="李鑫炎使用的动漫头像" width="360" height="360" />
+        </div>
         <h1 id="hero-title">李鑫炎</h1>
         <p class="hero-meta" data-typewriter data-speed="76">河师大 · 软院 · 26级新生</p>
+        <p class="hero-profile">男 · 软件工程（游戏动画方向）</p>
+        <address class="hero-contact-panel" id="contact" aria-label="联系方式">
+          <a href="tel:15660645882"><span>电话</span><strong>156 6064 5882</strong></a>
+          <a href="mailto:3603098347@qq.com"><span>邮箱</span><strong>3603098347@qq.com</strong></a>
+          <a href="https://github.com/lixinyan1025-commits" target="_blank" rel="noopener noreferrer"><span>GitHub</span><strong>lixinyan1025-commits</strong></a>
+        </address>
       </div>
-      <a class="scroll-cue" href="#about" aria-label="向下阅读">
-        <span>向下</span>
+      <a class="scroll-cue" href="#interests" aria-label="向下阅读">
+        <span>继续浏览</span>
+        <b>01 / 兴趣与探索</b>
         <i aria-hidden="true"></i>
       </a>
     </section>
 
     <main>
-      <section class="section section-about" id="about" aria-labelledby="about-title">
+      <section class="section section-interests" id="interests" aria-labelledby="interests-title">
         <div class="section-inner">
           <div class="section-heading" data-reveal>
-            <span class="section-index">01 / 关于我</span>
-            <h2 id="about-title">一些关于我的话</h2>
-            <p>不急着给自己贴很多标签，先认真记录此刻的兴趣、感受和正在了解的事。</p>
+            <span class="section-index">01 / 兴趣与探索</span>
+            <h2 id="interests-title">我感兴趣，也正在了解的事</h2>
+            <p>没有把它们写成“擅长”，只是把此刻愿意花时间了解和尝试的方向记录下来。</p>
           </div>
-
-          <div class="about-grid">
-            <div class="about-copy" data-reveal>
-              <p class="about-lead">
-                我大概是个喜欢安静欣赏和感受的人。电影、动漫、音乐和阅读，常常让我暂时走进另一个世界，也让我记住某个特定时刻的自己。
-              </p>
-              <p>
-                我对心理学，尤其是积极心理学比较感兴趣。读过一些自助类书籍，也翻过心理学和哲学入门内容，平时愿意和别人聊聊相关话题。
-              </p>
-              <blockquote class="typing-quote" data-typewriter data-speed="82">作品也是记忆的载体。</blockquote>
-
-              <details class="about-details" id="aboutDetails">
-                <summary><span class="summary-more">继续阅读</span><span class="summary-less">收起文字</span></summary>
-                <div class="about-story">
-                  <p>
-                    我喜欢看动漫，喜欢看那些角色在既定的世界观里展开属于自己的生命历程——或是探索存在的意义，或是沉浸于世俗的欢愉。我也喜欢看电影，尤其喜欢去电影院。去电影院像一场仪式：两个小时的光影流动，加上来回路上的思考，常常能把我的状态重新拉回正轨。
-                  </p>
-                  <p>
-                    说来也怪，我读书时感受到的那种安静，看动漫和电影时也能体验到。一个安安静静、不争吵的自己，安详地欣赏着另一个世界。这种安静让我能听到内心的声音，和阅读时别无二致。更让我着迷的是，电影和动漫能让我在平淡的现实生活中经历轰轰烈烈的人生，填补许多现实中从未体验过的情感。
-                  </p>
-                  <p>
-                    不过也有一个“副作用”：有时候短时间内追完一部动漫，特别是一个人熬夜追漫，就会陷入一种巨大的失落感——像去了另一个世界，与许多人结缘，历经世事，走了一遭红尘。回到现实后，却只有自己记得这一切。像黄粱一梦，又恍如隔世。
-                  </p>
-                  <p>
-                    时间久了之后，我发现真正牵动我的，往往不再只是剧情本身。当我回想某部电影时，脑海中浮现的更多是：当时的我在做什么，怀着怎样的心情，身边坐着谁。于是我觉得，欣赏这件事的价值，有时并不全在于被观看的事物，也在于此时此刻的环境、陪在身边一起看的人，以及那个特定时刻的自己。它们之所以珍贵，是因为它们是记忆的载体。
-                  </p>
-                  <p>
-                    我也喜欢听歌。旋律与歌词构筑的意境，能让我自然进入一种别样的状态。好听的歌和动漫一样，也承载着过去的时光。
-                  </p>
-                  <p>
-                    运动方面，羽毛球是我为数不多能放开打的项目，虽然水平一般。阅读上，小说读得不多，但我读过不少自助类书，也翻过一些心理学和哲学入门，对积极心理学挺感兴趣。
-                  </p>
-                  <p>
-                    高考结束后，我意外地喜欢上了以前很抗拒的诗歌。以前只觉得散文美，诗歌读不懂也欣赏不来。现在开始发现诗歌的美——美在语言、美在意境，也美在感受。不过我读得还少，很多内容也还在慢慢理解。
-                  </p>
-                  <p>
-                    对于这个世界，过去我觉得美只存在于自然里：落日、日出、山水、动物。我那时忽略了人。后来我学会把人看成风景——看一个人喜欢什么、关心什么、如何面对生活中的种种，看人们如何平衡人性与文明。慢慢地，人也成了我眼里的景。
-                  </p>
-                </div>
-              </details>
-            </div>
-
-            <figure class="about-figure" data-reveal>
-              <img src="assets/images/bamboo.webp" alt="竹林、小溪与亭子组成的安静景色" loading="lazy" />
-              <figcaption>喜欢安静地看一会儿，也喜欢慢慢理解。</figcaption>
-            </figure>
+          <div class="interest-grid">
+            <article class="interest-card interest-psychology" data-reveal><span class="interest-icon" aria-hidden="true">Ψ</span><h3>心理学</h3><p>对积极心理学比较感兴趣，也愿意和别人聊聊相关话题。</p><small>最愿意深入交流</small></article>
+            <article class="interest-card interest-ai" data-reveal><span class="interest-icon" aria-hidden="true">AI</span><h3>AI 与 Agent</h3><p>了解一些 AI 与 Agent 相关知识，会借助工具把想法尝试做成软件、游戏或网页。</p><small>边使用，边理解</small></article>
+            <article class="interest-card interest-game" data-reveal><span class="interest-icon" aria-hidden="true">◇</span><h3>游戏设计</h3><p>喜欢游戏设计，也在尝试把自己的点子做成可以体验的小游戏。</p><small>创意与交互</small></article>
+            <article class="interest-card interest-film" data-reveal><span class="interest-icon" aria-hidden="true">▶</span><h3>电影与动漫</h3><p>喜欢安静地进入另一个世界，也喜欢电影、角色和当时的自己共同留下的记忆。</p><small>光影与故事</small></article>
+            <article class="interest-card interest-reading" data-reveal><span class="interest-icon" aria-hidden="true">文</span><h3>阅读</h3><p>读过一些自助类书，也翻过心理学和哲学入门，小说读得不算多。</p><small>慢慢阅读</small></article>
+            <article class="interest-card interest-music" data-reveal><span class="interest-icon" aria-hidden="true">♪</span><h3>音乐</h3><p>喜欢旋律与歌词构成的意境，也喜欢歌曲承载过去时光的感觉。</p><small>旋律与记忆</small></article>
+            <article class="interest-card interest-sport" data-reveal><span class="interest-icon" aria-hidden="true">↗</span><h3>羽毛球</h3><p>这是我为数不多能放开打的运动，虽然水平一般，但很享受过程。</p><small>放松与运动</small></article>
+            <article class="interest-card interest-ppt" data-reveal><span class="interest-icon" aria-hidden="true">▤</span><h3>PPT 制作</h3><p>会制作 PPT，喜欢把零散的信息和画面整理得更清楚一些。</p><small>信息与表达</small></article>
           </div>
-        </div>
-      </section>
-
-      <section class="garden-interlude" aria-label="园林水景与个人感受">
-        <div class="garden-shade" aria-hidden="true"></div>
-        <div class="garden-quote">
-          <span>看自然，也看人。</span>
-          <strong data-typewriter data-speed="88">后来，我学会把人看成风景。</strong>
         </div>
       </section>
 
       <section class="section section-works" id="works" aria-labelledby="works-title">
         <div class="section-inner">
-          <div class="section-heading" data-reveal>
-            <span class="section-index">02 / 我的作品</span>
-            <h2 id="works-title">借助 AI，把想法做出来</h2>
-            <p>这些作品都在 AI 的帮助下完成。我负责提出想法、确认需求和体验方向，再一点点测试、调整和完善。</p>
+          <div class="works-heading-layout">
+            <div class="section-heading" data-reveal>
+              <span class="section-index">02 / 我的作品</span>
+              <h2 id="works-title">借助 AI，把想法做出来</h2>
+              <p>这些作品都在 AI 的帮助下完成。我负责提出想法、确认需求和体验方向，再一点点测试、调整和完善。</p>
+            </div>
+            <div class="vertical-showcase" data-reveal aria-label="作品目录">
+              <span data-vertical-text data-speed="180">刚刚好 · Android App</span>
+              <span data-vertical-text data-speed="180">坦克防线 · 网页游戏</span>
+              <span data-vertical-text data-speed="180">七夕 · 主题网页</span>
+            </div>
           </div>
 
           <article class="featured-work" data-reveal>
@@ -160,9 +124,9 @@
                 <li><strong>到点自动打开应用。</strong>任务开始时，可以自动打开这项计划需要使用的软件，让计划更容易真正开始。</li>
                 <li><strong>桌面小宠与 AI 辅助。</strong>接入 API 后，桌面小宠“小满”会提醒什么任务马上开始；也可以在应用内使用 AI 分析辅助安排计划，或者和 AI 聊聊其他内容。</li>
               </ol>
-              <div class="project-actions">
-                <a class="button button-primary" href="https://lixinyan1025-commits.github.io/JustEnough-Android/" target="_blank" rel="noopener noreferrer">功能展示与下载</a>
-                <a class="button button-secondary" href="https://github.com/lixinyan1025-commits/JustEnough-Android" target="_blank" rel="noopener noreferrer">查看源码</a>
+              <div class="project-links">
+                <a class="url-card url-card-live" href="https://lixinyan1025-commits.github.io/JustEnough-Android/" target="_blank" rel="noopener noreferrer"><span>作品网页</span><strong>lixinyan1025-commits.github.io/JustEnough-Android/</strong></a>
+                <a class="url-card url-card-code" href="https://github.com/lixinyan1025-commits/JustEnough-Android" target="_blank" rel="noopener noreferrer"><span>源码仓库</span><strong>github.com/lixinyan1025-commits/JustEnough-Android</strong></a>
               </div>
             </div>
           </article>
@@ -176,9 +140,9 @@
                 <div class="work-tags"><span>AI 辅助作品</span><span>网页游戏</span></div>
                 <h3>坦克防线</h3>
                 <p>在 AI 帮助下完成的网页版像素坦克游戏。玩家需要守护核心，完成六个关卡，并利用不同地形和技能对抗敌人。</p>
-                <div class="project-actions">
-                  <a class="text-link" href="https://lixinyan1025-commits.github.io/tank-defense/" target="_blank" rel="noopener noreferrer">在线试玩</a>
-                  <a class="text-link" href="https://github.com/lixinyan1025-commits/tank-defense" target="_blank" rel="noopener noreferrer">源码仓库</a>
+                <div class="project-links project-links-compact">
+                  <a class="url-card url-card-live" href="https://lixinyan1025-commits.github.io/tank-defense/" target="_blank" rel="noopener noreferrer"><span>作品网页</span><strong>lixinyan1025-commits.github.io/tank-defense/</strong></a>
+                  <a class="url-card url-card-code" href="https://github.com/lixinyan1025-commits/tank-defense" target="_blank" rel="noopener noreferrer"><span>源码仓库</span><strong>github.com/lixinyan1025-commits/tank-defense</strong></a>
                 </div>
               </div>
             </article>
@@ -191,9 +155,9 @@
                 <div class="work-tags"><span>AI 辅助作品</span><span>主题网页</span></div>
                 <h3>七夕 · 银汉迢迢</h3>
                 <p>在 AI 帮助下完成的七夕主题网页。银河、上弦月、水面倒影、流萤与竖排诗句一起构成了这幅动态画面。</p>
-                <div class="project-actions">
-                  <a class="text-link" href="https://lixinyan1025-commits.github.io/qixi/" target="_blank" rel="noopener noreferrer">在线体验</a>
-                  <a class="text-link" href="https://github.com/lixinyan1025-commits/qixi" target="_blank" rel="noopener noreferrer">源码仓库</a>
+                <div class="project-links project-links-compact">
+                  <a class="url-card url-card-live" href="https://lixinyan1025-commits.github.io/qixi/" target="_blank" rel="noopener noreferrer"><span>作品网页</span><strong>lixinyan1025-commits.github.io/qixi/</strong></a>
+                  <a class="url-card url-card-code" href="https://github.com/lixinyan1025-commits/qixi" target="_blank" rel="noopener noreferrer"><span>源码仓库</span><strong>github.com/lixinyan1025-commits/qixi</strong></a>
                 </div>
               </div>
             </article>
@@ -204,8 +168,8 @@
       <section class="section section-learning" id="learning" aria-labelledby="learning-title">
         <div class="section-inner">
           <div class="section-heading" data-reveal>
-            <span class="section-index">03 / 学习记录</span>
-            <h2 id="learning-title">学习过程中的一些记录</h2>
+            <span class="section-index">03 / 个人学习记录</span>
+            <h2 id="learning-title">证书与荣誉</h2>
             <p>在了解 AI 相关内容的过程中完成的课程和认证。点击任意证书，可以查看完整原图。</p>
           </div>
 
@@ -241,8 +205,8 @@
       <section class="qixi-section" id="qixi" aria-labelledby="qixi-title">
         <div class="qixi-stars" aria-hidden="true"></div>
         <div class="qixi-heading" data-reveal>
-          <span class="section-index">04 / 动态展示</span>
-          <h2 id="qixi-title" data-typewriter data-speed="70">AI 辅助作品 · 七夕主题网页展示</h2>
+          <span class="section-index">04 / 七夕主题作品展示</span>
+          <h2 id="qixi-title"><span class="qixi-title-ai" data-typewriter data-speed="70" data-delay="180">AI 辅助作品</span><span class="qixi-title-dot" data-typewriter data-speed="70" data-delay="1150"> · </span><span class="qixi-title-name" data-typewriter data-speed="70" data-delay="1450">七夕主题网页展示</span></h2>
           <p>下面直接展示这项作品的实际动态画面。完整页面可以单独打开体验。</p>
           <a class="button button-night" href="https://lixinyan1025-commits.github.io/qixi/" target="_blank" rel="noopener noreferrer">打开完整网页</a>
         </div>
@@ -255,25 +219,82 @@
             title="七夕·银汉迢迢动态网页"
             data-src="https://lixinyan1025-commits.github.io/qixi/"
             loading="lazy"
+            allow="autoplay"
             referrerpolicy="strict-origin-when-cross-origin"
           ></iframe>
         </div>
       </section>
 
-      <section class="section section-contact" id="contact" aria-labelledby="contact-title">
-        <div class="section-inner contact-inner">
-          <div data-reveal>
-            <span class="section-index">05 / 联系</span>
-            <h2 id="contact-title">很高兴在这里认识你</h2>
-            <p>这是我此刻的一份个人记录。以后学到新的东西、做出新的作品，也会继续补充。</p>
+      <section class="section section-about" id="about" aria-labelledby="about-title">
+        <div class="section-inner">
+          <div class="section-heading" data-reveal>
+            <span class="section-index">05 / 关于我</span>
+            <h2 id="about-title">关于我</h2>
           </div>
-          <address class="contact-list" data-reveal>
-            <a href="tel:15660645882"><span>电话</span><strong>156 6064 5882</strong></a>
-            <a href="mailto:3603098347@qq.com"><span>邮箱</span><strong>3603098347@qq.com</strong></a>
-            <a href="https://github.com/lixinyan1025-commits" target="_blank" rel="noopener noreferrer"><span>GitHub</span><strong>lixinyan1025-commits</strong></a>
-          </address>
+
+          <div class="about-reading" data-reveal>
+            <img class="about-inline-image" src="assets/images/bamboo.webp" alt="竹林、小溪与亭子组成的安静景色" loading="lazy" />
+            <div class="about-copy">
+              <p>我大概是个欣赏和品味的人。 我喜欢看动漫，喜欢看那些角色在既定的世界观里展开属于自己的生命历程——或是探索存在的意义，或是沉浸于世俗的欢愉。我也喜欢看电影，尤其喜欢去电影院。<mark class="accent-violet">去电影院是一场仪式</mark>，两个小时的光影流动，加上来回路上的思考，足以把我整个人的状态重新拉回正轨。</p>
+              <p>说来也怪，我读书时感受到的那种安静，看动漫和电影时也能体验到。一个安安静静、不争吵的自己，安详地欣赏着另一个世界。这种安静让我能听到<mark class="accent-teal">内心的声音</mark>，和阅读时别无二致。更让我着迷的，电影和动漫能让我在平淡的现实生活中一样经历轰轰烈烈的人生，填补许多现实中从未体验过的情感。</p>
+              <p>不过有一个“副作用”：有时候短时间内追完一部动漫，特别是一个人熬夜追漫，就会陷入一种巨大的失落感——像去了另一个世界，与许多人结缘，历经世事，走了一遭红尘。回到现实后，却只有自己记得这一切。像黄粱一梦，又恍如隔世。</p>
+              <p>但时间久了之后，我发现真正牵动我的，往往不再是剧情本身。当我回想某部电影时，脑海中浮现的更多是：当时的我在做什么，怀着怎样的心情，身边坐着谁。于是我觉得，欣赏这件事的价值，有时并不全在于被观看的事物，也在于此时此刻的环境、陪在身边一起看的人、以及那个特定时刻的自己。它们之所以珍贵，是因为它们是<mark class="accent-gold">记忆的载体</mark>。</p>
+              <p>同样，我也喜欢听歌。旋律与歌词构筑的意境，能让我自然地进入一种别样的状态。好听的歌和动漫一样，也承载着过去的时光。</p>
+              <p>运动方面，羽毛球是我为数不多能放开打的，虽然水平一般。篮球总有些放不开，网球小时候没接触过，足球和乒乓球更是不太会玩。</p>
+              <p>阅读上，小说读得不多，但我读过不少自助类的书，也翻过一些心理学和哲学入门。对<mark class="accent-teal">积极心理学</mark>挺感兴趣的。</p>
+              <p>高考结束后，我意外地喜欢上了以前很抗拒的诗歌。以前只觉得散文美，诗歌读不懂也欣赏不来。现在发现诗歌真的好美——美在语言，美在意境，美在感受。不过可悲的是我读得少，很多还读不懂。</p>
+              <p>对于这个世界，过去我觉得美只存在于自然里：落日、日出、山水、动物。我那时忽略了人。我觉得每个人都像是从另一个世界来的灵体，来此旅游一番，彼此由世俗关系牵定，除此之外再无美丽可言。<mark class="accent-violet">后来我学会把人看成风景</mark>——看一个人喜欢什么、关心什么、如何面对生活中的种种，看人们如何平衡人性与文明。慢慢地，人也成了我眼里的景。</p>
+            </div>
+          </div>
         </div>
       </section>
+
+      <section class="closing-section" id="closing" aria-labelledby="closing-title">
+        <div class="closing-sky" aria-hidden="true">
+          <span class="closing-orbit closing-orbit-one"></span>
+          <span class="closing-orbit closing-orbit-two"></span>
+          <span class="closing-glow"></span>
+        </div>
+
+        <div class="closing-inner">
+          <div class="closing-copy" data-reveal>
+            <span class="section-index">06 / 写在最后</span>
+            <h2 id="closing-title" data-typewriter data-speed="92" data-delay="240">感谢在这里遇见你</h2>
+            <p>这是这份个人主页从创建至今，安静留下的一点时间记录。</p>
+          </div>
+
+          <div class="site-time-card" data-reveal>
+            <div class="site-time-head">
+              <span>本站已运行</span>
+              <time datetime="2026-08-22T17:20:29+08:00" title="本站创建于 2026 年 8 月 22 日">始于 2026.08.22</time>
+            </div>
+            <div class="uptime-digits" id="siteUptime" aria-label="本站运行时间">
+              <span class="uptime-unit"><strong data-uptime="days">000</strong><small>天</small></span>
+              <i aria-hidden="true">:</i>
+              <span class="uptime-unit"><strong data-uptime="hours">00</strong><small>时</small></span>
+              <i aria-hidden="true">:</i>
+              <span class="uptime-unit"><strong data-uptime="minutes">00</strong><small>分</small></span>
+              <i aria-hidden="true">:</i>
+              <span class="uptime-unit"><strong data-uptime="seconds">00</strong><small>秒</small></span>
+            </div>
+          </div>
+
+          <div class="visit-stats" data-reveal aria-label="本站访问统计">
+            <article class="visit-stat-card">
+              <span class="visit-stat-icon" aria-hidden="true">◉</span>
+              <div><small>累计访客</small><strong id="totalVisitors" aria-live="polite">—</strong></div>
+              <p>匿名唯一访客</p>
+            </article>
+            <article class="visit-stat-card visit-stat-card-today">
+              <span class="visit-stat-icon" aria-hidden="true">↗</span>
+              <div><small>今日浏览</small><strong id="todayPageviews" aria-live="polite">—</strong></div>
+              <p>按中国日期更新</p>
+            </article>
+          </div>
+          <p class="stats-status" id="statsStatus" aria-live="polite">访问数据连接中…</p>
+        </div>
+      </section>
+
     </main>
 
     <footer class="site-footer">
