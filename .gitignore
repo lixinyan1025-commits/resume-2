@@ -1,0 +1,6 @@
+.codex-remote-attachments/
+deliverables/
+assets/**/*-source.*
+*.log
+.DS_Store
+Thumbs.db

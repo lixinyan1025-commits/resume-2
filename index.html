@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="zh-CN" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="李鑫炎的个人在线简历：关于我、AI 辅助作品与学习记录。" />
+    <meta name="theme-color" content="#173d35" />
+    <meta property="og:title" content="李鑫炎 · 个人主页" />
+    <meta property="og:description" content="河师大 · 软院 · 26级新生" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/images/hero-poster.png" />
+    <title>李鑫炎 · 个人主页</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+    <script>document.documentElement.classList.replace('no-js', 'js');</script>
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#about">跳到主要内容</a>
+    <div class="leaf-field" aria-hidden="true"></div>
+
+    <header class="site-header" aria-label="页面导航">
+      <a class="site-mark" href="#top" aria-label="返回顶部">LXY</a>
+      <nav class="site-nav">
+        <a href="#about">关于我</a>
+        <a href="#works">我的作品</a>
+        <a href="#learning">学习记录</a>
+        <a href="#qixi">七夕展示</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </header>
+
+    <button class="music-control" id="musicControl" type="button" aria-pressed="false" aria-label="播放背景音乐">
+      <span class="music-disc" aria-hidden="true"><span></span></span>
+      <span class="music-copy">
+        <strong id="musicLabel">播放音乐</strong>
+        <small>《知了》· 陈默之</small>
+      </span>
+    </button>
+    <audio id="backgroundMusic" src="assets/media/zhiliao.mp3" preload="metadata" loop></audio>
+
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <video
+        class="hero-video"
+        id="heroVideo"
+        src="assets/media/rain-lotus.mp4"
+        poster="assets/images/hero-poster.png"
+        muted
+        playsinline
+        preload="metadata"
+        aria-hidden="true"
+      ></video>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <div class="hero-content">
+        <img class="hero-avatar" src="assets/images/avatar.webp" alt="李鑫炎使用的动漫头像" width="360" height="312" />
+        <h1 id="hero-title">李鑫炎</h1>
+        <p class="hero-meta" data-typewriter data-speed="76">河师大 · 软院 · 26级新生</p>
+      </div>
+      <a class="scroll-cue" href="#about" aria-label="向下阅读">
+        <span>向下</span>
+        <i aria-hidden="true"></i>
+      </a>
+    </section>
+
+    <main>
+      <section class="section section-about" id="about" aria-labelledby="about-title">
+        <div class="section-inner">
+          <div class="section-heading" data-reveal>
+            <span class="section-index">01 / 关于我</span>
+            <h2 id="about-title">一些关于我的话</h2>
+            <p>不急着给自己贴很多标签，先认真记录此刻的兴趣、感受和正在了解的事。</p>
+          </div>
+
+          <div class="about-grid">
+            <div class="about-copy" data-reveal>
+              <p class="about-lead">
+                我大概是个喜欢安静欣赏和感受的人。电影、动漫、音乐和阅读，常常让我暂时走进另一个世界，也让我记住某个特定时刻的自己。
+              </p>
+              <p>
+                我对心理学，尤其是积极心理学比较感兴趣。读过一些自助类书籍，也翻过心理学和哲学入门内容，平时愿意和别人聊聊相关话题。
+              </p>
+              <blockquote class="typing-quote" data-typewriter data-speed="82">作品也是记忆的载体。</blockquote>
+
+              <details class="about-details" id="aboutDetails">
+                <summary><span class="summary-more">继续阅读</span><span class="summary-less">收起文字</span></summary>
+                <div class="about-story">
+                  <p>
+                    我喜欢看动漫，喜欢看那些角色在既定的世界观里展开属于自己的生命历程——或是探索存在的意义，或是沉浸于世俗的欢愉。我也喜欢看电影，尤其喜欢去电影院。去电影院像一场仪式：两个小时的光影流动，加上来回路上的思考，常常能把我的状态重新拉回正轨。
+                  </p>
+                  <p>
+                    说来也怪，我读书时感受到的那种安静，看动漫和电影时也能体验到。一个安安静静、不争吵的自己，安详地欣赏着另一个世界。这种安静让我能听到内心的声音，和阅读时别无二致。更让我着迷的是，电影和动漫能让我在平淡的现实生活中经历轰轰烈烈的人生，填补许多现实中从未体验过的情感。
+                  </p>
+                  <p>
+                    不过也有一个“副作用”：有时候短时间内追完一部动漫，特别是一个人熬夜追漫，就会陷入一种巨大的失落感——像去了另一个世界，与许多人结缘，历经世事，走了一遭红尘。回到现实后，却只有自己记得这一切。像黄粱一梦，又恍如隔世。
+                  </p>
+                  <p>
+                    时间久了之后，我发现真正牵动我的，往往不再只是剧情本身。当我回想某部电影时，脑海中浮现的更多是：当时的我在做什么，怀着怎样的心情，身边坐着谁。于是我觉得，欣赏这件事的价值，有时并不全在于被观看的事物，也在于此时此刻的环境、陪在身边一起看的人，以及那个特定时刻的自己。它们之所以珍贵，是因为它们是记忆的载体。
+                  </p>
+                  <p>
+                    我也喜欢听歌。旋律与歌词构筑的意境，能让我自然进入一种别样的状态。好听的歌和动漫一样，也承载着过去的时光。
+                  </p>
+                  <p>
+                    运动方面，羽毛球是我为数不多能放开打的项目，虽然水平一般。阅读上，小说读得不多，但我读过不少自助类书，也翻过一些心理学和哲学入门，对积极心理学挺感兴趣。
+                  </p>
+                  <p>
+                    高考结束后，我意外地喜欢上了以前很抗拒的诗歌。以前只觉得散文美，诗歌读不懂也欣赏不来。现在开始发现诗歌的美——美在语言、美在意境，也美在感受。不过我读得还少，很多内容也还在慢慢理解。
+                  </p>
+                  <p>
+                    对于这个世界，过去我觉得美只存在于自然里：落日、日出、山水、动物。我那时忽略了人。后来我学会把人看成风景——看一个人喜欢什么、关心什么、如何面对生活中的种种，看人们如何平衡人性与文明。慢慢地，人也成了我眼里的景。
+                  </p>
+                </div>
+              </details>
+            </div>
+
+            <figure class="about-figure" data-reveal>
+              <img src="assets/images/bamboo.webp" alt="竹林、小溪与亭子组成的安静景色" loading="lazy" />
+              <figcaption>喜欢安静地看一会儿，也喜欢慢慢理解。</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="garden-interlude" aria-label="园林水景与个人感受">
+        <div class="garden-shade" aria-hidden="true"></div>
+        <div class="garden-quote">
+          <span>看自然，也看人。</span>
+          <strong data-typewriter data-speed="88">后来，我学会把人看成风景。</strong>
+        </div>
+      </section>
+
+      <section class="section section-works" id="works" aria-labelledby="works-title">
+        <div class="section-inner">
+          <div class="section-heading" data-reveal>
+            <span class="section-index">02 / 我的作品</span>
+            <h2 id="works-title">借助 AI，把想法做出来</h2>
+            <p>这些作品都在 AI 的帮助下完成。我负责提出想法、确认需求和体验方向，再一点点测试、调整和完善。</p>
+          </div>
+
+          <article class="featured-work" data-reveal>
+            <div class="phone-gallery" aria-label="刚刚好 App 截图">
+              <figure class="phone-shot phone-shot-left">
+                <img src="assets/projects/just-enough-plan.webp" alt="刚刚好 App 的四象限计划页面" loading="lazy" />
+              </figure>
+              <figure class="phone-shot phone-shot-main">
+                <img src="assets/projects/just-enough-reminder.webp" alt="刚刚好 App 的到点提醒和自动开始界面" loading="lazy" />
+              </figure>
+              <figure class="phone-shot phone-shot-right">
+                <img src="assets/projects/just-enough-pet.webp" alt="桌面小宠小满的提醒和聊天界面" loading="lazy" />
+              </figure>
+            </div>
+
+            <div class="work-copy">
+              <div class="work-tags"><span>AI 辅助作品</span><span>Android App</span><span>APK</span></div>
+              <h3>刚刚好 <small>Just Enough</small></h3>
+              <p class="work-intro">
+                我做了一款叫「刚刚好」的 Android App，是我借助 AI 从想法一步步做成的完整软件。目前已经完成开发、测试和 APK 打包，可以直接安装使用。
+              </p>
+              <p>它是一款计划管理类 App，主要有两个我很看重的特点：</p>
+              <ol class="feature-list">
+                <li><strong>到点自动打开应用。</strong>任务开始时，可以自动打开这项计划需要使用的软件，让计划更容易真正开始。</li>
+                <li><strong>桌面小宠与 AI 辅助。</strong>接入 API 后，桌面小宠“小满”会提醒什么任务马上开始；也可以在应用内使用 AI 分析辅助安排计划，或者和 AI 聊聊其他内容。</li>
+              </ol>
+              <div class="project-actions">
+                <a class="button button-primary" href="https://lixinyan1025-commits.github.io/JustEnough-Android/" target="_blank" rel="noopener noreferrer">功能展示与下载</a>
+                <a class="button button-secondary" href="https://github.com/lixinyan1025-commits/JustEnough-Android" target="_blank" rel="noopener noreferrer">查看源码</a>
+              </div>
+            </div>
+          </article>
+
+          <div class="project-grid">
+            <article class="project-card" data-reveal>
+              <a class="project-media" href="https://lixinyan1025-commits.github.io/tank-defense/" target="_blank" rel="noopener noreferrer" aria-label="在线试玩坦克防线">
+                <img src="assets/projects/tank-defense.webp" alt="坦克防线网页版游戏画面" loading="lazy" />
+              </a>
+              <div class="project-card-body">
+                <div class="work-tags"><span>AI 辅助作品</span><span>网页游戏</span></div>
+                <h3>坦克防线</h3>
+                <p>在 AI 帮助下完成的网页版像素坦克游戏。玩家需要守护核心，完成六个关卡，并利用不同地形和技能对抗敌人。</p>
+                <div class="project-actions">
+                  <a class="text-link" href="https://lixinyan1025-commits.github.io/tank-defense/" target="_blank" rel="noopener noreferrer">在线试玩</a>
+                  <a class="text-link" href="https://github.com/lixinyan1025-commits/tank-defense" target="_blank" rel="noopener noreferrer">源码仓库</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project-card project-card-qixi" data-reveal>
+              <a class="project-media" href="https://lixinyan1025-commits.github.io/qixi/" target="_blank" rel="noopener noreferrer" aria-label="打开七夕主题网页">
+                <img src="assets/projects/qixi.webp" alt="七夕银汉迢迢网页中的银河、月亮与水面" loading="lazy" />
+              </a>
+              <div class="project-card-body">
+                <div class="work-tags"><span>AI 辅助作品</span><span>主题网页</span></div>
+                <h3>七夕 · 银汉迢迢</h3>
+                <p>在 AI 帮助下完成的七夕主题网页。银河、上弦月、水面倒影、流萤与竖排诗句一起构成了这幅动态画面。</p>
+                <div class="project-actions">
+                  <a class="text-link" href="https://lixinyan1025-commits.github.io/qixi/" target="_blank" rel="noopener noreferrer">在线体验</a>
+                  <a class="text-link" href="https://github.com/lixinyan1025-commits/qixi" target="_blank" rel="noopener noreferrer">源码仓库</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-learning" id="learning" aria-labelledby="learning-title">
+        <div class="section-inner">
+          <div class="section-heading" data-reveal>
+            <span class="section-index">03 / 学习记录</span>
+            <h2 id="learning-title">学习过程中的一些记录</h2>
+            <p>在了解 AI 相关内容的过程中完成的课程和认证。点击任意证书，可以查看完整原图。</p>
+          </div>
+
+          <div class="certificate-grid">
+            <button class="certificate-card certificate-card-wide" type="button" data-certificate data-full="assets/certificates/original/clouder-agent-app.png" data-title="基于百炼平台构建智能体应用">
+              <img src="assets/certificates/thumb/clouder-agent-app.webp" alt="基于百炼平台构建智能体应用证书" loading="lazy" />
+              <span><strong>基于百炼平台构建智能体应用</strong><small>阿里云 Apsara Clouder 专项技能认证</small></span>
+            </button>
+            <button class="certificate-card certificate-card-wide" type="button" data-certificate data-full="assets/certificates/original/clouder-content.png" data-title="利用大模型提升内容生产能力">
+              <img src="assets/certificates/thumb/clouder-content.webp" alt="利用大模型提升内容生产能力证书" loading="lazy" />
+              <span><strong>利用大模型提升内容生产能力</strong><small>阿里云 Apsara Clouder 专项技能认证</small></span>
+            </button>
+            <button class="certificate-card certificate-card-wide" type="button" data-certificate data-full="assets/certificates/original/clouder-lingma.png" data-title="基于通义灵码实现高效 AI 编码实践">
+              <img src="assets/certificates/thumb/clouder-lingma.webp" alt="基于通义灵码实现高效 AI 编码实践证书" loading="lazy" />
+              <span><strong>基于通义灵码实现高效 AI 编码实践</strong><small>阿里云 Apsara Clouder 专项技能认证</small></span>
+            </button>
+            <button class="certificate-card certificate-card-wide" type="button" data-certificate data-full="assets/certificates/original/clouder-rag.png" data-title="RAG 应用构建及优化">
+              <img src="assets/certificates/thumb/clouder-rag.webp" alt="RAG 应用构建及优化证书" loading="lazy" />
+              <span><strong>RAG 应用构建及优化</strong><small>阿里云 Apsara Clouder 专项技能认证</small></span>
+            </button>
+            <button class="certificate-card certificate-card-tall certificate-card-tall-first" type="button" data-certificate data-full="assets/certificates/original/trainer-primary.png" data-title="人工智能训练师（初级）">
+              <img src="assets/certificates/thumb/trainer-primary.webp" alt="人工智能训练师初级证书" loading="lazy" />
+              <span><strong>人工智能训练师（初级）</strong><small>橙点同学技能认证</small></span>
+            </button>
+            <button class="certificate-card certificate-card-tall certificate-card-tall-second" type="button" data-certificate data-full="assets/certificates/original/trainer-advanced.png" data-title="人工智能训练师（高级）">
+              <img src="assets/certificates/thumb/trainer-advanced.webp" alt="人工智能训练师高级证书" loading="lazy" />
+              <span><strong>人工智能训练师（高级）</strong><small>橙点同学技能认证</small></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="qixi-section" id="qixi" aria-labelledby="qixi-title">
+        <div class="qixi-stars" aria-hidden="true"></div>
+        <div class="qixi-heading" data-reveal>
+          <span class="section-index">04 / 动态展示</span>
+          <h2 id="qixi-title" data-typewriter data-speed="70">AI 辅助作品 · 七夕主题网页展示</h2>
+          <p>下面直接展示这项作品的实际动态画面。完整页面可以单独打开体验。</p>
+          <a class="button button-night" href="https://lixinyan1025-commits.github.io/qixi/" target="_blank" rel="noopener noreferrer">打开完整网页</a>
+        </div>
+
+        <div class="qixi-frame" id="qixiFrame">
+          <img class="qixi-poster" src="assets/projects/qixi.webp" alt="七夕网页加载预览" />
+          <div class="qixi-loading" aria-live="polite">动态画面加载中…</div>
+          <iframe
+            id="qixiIframe"
+            title="七夕·银汉迢迢动态网页"
+            data-src="https://lixinyan1025-commits.github.io/qixi/"
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </div>
+      </section>
+
+      <section class="section section-contact" id="contact" aria-labelledby="contact-title">
+        <div class="section-inner contact-inner">
+          <div data-reveal>
+            <span class="section-index">05 / 联系</span>
+            <h2 id="contact-title">很高兴在这里认识你</h2>
+            <p>这是我此刻的一份个人记录。以后学到新的东西、做出新的作品，也会继续补充。</p>
+          </div>
+          <address class="contact-list" data-reveal>
+            <a href="tel:15660645882"><span>电话</span><strong>156 6064 5882</strong></a>
+            <a href="mailto:3603098347@qq.com"><span>邮箱</span><strong>3603098347@qq.com</strong></a>
+            <a href="https://github.com/lixinyan1025-commits" target="_blank" rel="noopener noreferrer"><span>GitHub</span><strong>lixinyan1025-commits</strong></a>
+          </address>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>李鑫炎 · 个人主页</span>
+      <a href="#top">回到顶部</a>
+    </footer>
+
+    <dialog class="certificate-dialog" id="certificateDialog" aria-labelledby="certificateDialogTitle">
+      <div class="dialog-head">
+        <h2 id="certificateDialogTitle">证书原图</h2>
+        <button class="dialog-close" id="dialogClose" type="button" aria-label="关闭证书原图">×</button>
+      </div>
+      <div class="dialog-media">
+        <img id="dialogImage" src="" alt="" />
+      </div>
+    </dialog>
+  </body>
+</html>
