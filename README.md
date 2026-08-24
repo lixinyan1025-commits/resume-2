@@ -18,6 +18,14 @@
 - 竹叶与金色小叶飘落、纵向流水文字、减少动态效果支持和响应式布局
 - 页面自身不播放音乐；进入七夕展示后由嵌入网页管理其音乐
 
+## 背景图片来源
+
+- 兴趣页雾山湖景：[Wolfgang Hasselmann / Unsplash](https://unsplash.com/photos/1LoQjBROPD4)
+- 作品页青金水纹：[Steve Johnson / Unsplash](https://unsplash.com/photos/R0H9xM7YkEw)
+- 证书页暖色树影：[Alexander Kaufmann / Unsplash](https://unsplash.com/photos/ZIjQEDjoJtg)
+
+三张图片均下载到项目本地，并依据 Unsplash License 使用。
+
 ## 本地运行
 
 项目使用原生 HTML、CSS 和 JavaScript，无须安装依赖。可以直接打开 `index.html`，也可以在项目目录启动静态服务器：
