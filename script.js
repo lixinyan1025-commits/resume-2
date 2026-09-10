@@ -323,11 +323,20 @@
 
   const leafField = document.querySelector(".leaf-field");
   let liveLeaves = 0;
+  const mobileLeaves = window.matchMedia("(max-width: 719px)");
+
+  // 旋转设备或缩窄窗口后立即回落到手机上限，不留下桌面端的数量。
+  mobileLeaves.addEventListener("change", () => {
+    if (!leafField) return;
+    const maximum = mobileLeaves.matches ? 20 : 38;
+    [...leafField.children].slice(maximum).forEach((leaf) => leaf.remove());
+    liveLeaves = leafField.childElementCount;
+  });
 
   function spawnLeaf(initial = false) {
     if (!leafField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
-    const isMobile = window.innerWidth < 720;
-    const maximum = isMobile ? 11 : 20;
+    const isMobile = mobileLeaves.matches;
+    const maximum = isMobile ? 20 : 38;
     if (liveLeaves >= maximum) return;
 
     const leaf = document.createElement("i");
@@ -359,12 +368,13 @@
   }
 
   if (!reducedMotion.matches) {
-    const initialCount = window.innerWidth < 720 ? 8 : 14;
+    // 同时增加首屏数量与补充频率，避免只提高上限却看不到更多落叶。
+    const initialCount = mobileLeaves.matches ? 20 : 38;
     for (let index = 0; index < initialCount; index += 1) spawnLeaf(true);
 
     function scheduleLeaf() {
-      const isMobile = window.innerWidth < 720;
-      const delay = isMobile ? 1000 + Math.random() * 500 : 550 + Math.random() * 350;
+      const isMobile = mobileLeaves.matches;
+      const delay = isMobile ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
       window.setTimeout(() => {
         spawnLeaf(false);
         scheduleLeaf();
