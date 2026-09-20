@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 78" fill="none">
+  <defs>
+    <linearGradient id="leaf" x1="15" y1="8" x2="49" y2="62" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#bdc984"/>
+      <stop offset=".5" stop-color="#8ca45d"/>
+      <stop offset="1" stop-color="#587548"/>
+    </linearGradient>
+  </defs>
+  <!-- Broad, shallow palm-shaped lobes with a curved petiole. -->
+  <path d="M33 57C33 64 29 70 26 75" stroke="#846c42" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M32 59C25 64 18 60 14 53L6 50L10 43C6 38 4 33 3 28C10 28 15 31 20 34C19 28 18 22 16 15C24 18 28 22 29 25C29 16 31 9 34 3C39 11 40 17 40 25C45 21 49 18 55 16C53 24 51 30 48 35C54 32 59 31 65 30C62 38 59 42 54 46L59 53L50 54C44 63 38 63 32 59Z" fill="url(#leaf)" stroke="#587548" stroke-width=".7" stroke-linejoin="round"/>
+  <path d="M33 59C34 42 35 24 34 9M33 56C26 46 16 36 8 31M34 55C41 45 52 36 61 32M33 53C28 40 24 27 19 20M34 53C39 38 46 27 51 21" stroke="#f8ecc0" stroke-opacity=".42" stroke-width="1.1" stroke-linecap="round"/>
+  <g stroke="#587548" stroke-opacity=".44" stroke-width=".65" stroke-linecap="round">
+    <path d="M33 59L34 14M32 51L14 38M35 50L55 37"/>
+    <path d="M25 44L15 45M26 38L27 29M42 41L51 42M40 45L47 53"/>
+    <path d="M34 29L30 23M34 36L39 29M34 44L29 36M21 41L17 50"/>
+  </g>
+</svg>

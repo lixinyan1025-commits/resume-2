@@ -321,65 +321,66 @@
     navSections.forEach((section) => navObserver.observe(section));
   }
 
-  const catkinField = document.querySelector(".catkin-field");
-  const mobileCatkins = window.matchMedia("(max-width: 719px)");
-  let catkinTimer;
-  const catkinLimit = () => mobileCatkins.matches ? 20 : 38;
+  const wutongField = document.querySelector(".wutong-field");
+  const mobileWutongs = window.matchMedia("(max-width: 719px)");
+  let wutongTimer;
+  const wutongLimit = () => mobileWutongs.matches ? 20 : 38;
 
-  function spawnCatkin(initial = false) {
-    if (!catkinField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
-    if (catkinField.childElementCount >= catkinLimit()) return;
+  function spawnWutong(initial = false) {
+    if (!wutongField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
+    if (wutongField.childElementCount >= wutongLimit()) return;
 
-    const catkin = document.createElement("i");
-    const isDistant = Math.random() < 0.2;
-    catkin.className = `floating-catkin${isDistant ? " floating-catkin-distant" : ""}`;
-    const size = (mobileCatkins.matches ? 16 : 18) + Math.random() * 12;
-    const duration = 18 + Math.random() * 12;
+    const wutong = document.createElement("i");
+    const isDistant = Math.random() < 0.18;
+    const isGolden = Math.random() < 0.58;
+    wutong.className = `floating-wutong${isGolden ? " floating-wutong-gold" : ""}${isDistant ? " floating-wutong-distant" : ""}`;
+    const size = (mobileWutongs.matches ? 24 : 30) + Math.random() * 16;
+    const duration = 14 + Math.random() * 9;
     const drift = -100 + Math.random() * 200;
-    // 柳絮均匀穿过整个画面，允许短暂掠过文字，不只集中在两侧。
+    // 梧桐叶均匀穿过整个画面，允许短暂掠过文字，不只集中在两侧。
     const x = 2 + Math.random() * 96;
 
-    catkin.style.setProperty("--catkin-x", `${x}vw`);
-    catkin.style.setProperty("--catkin-size", `${isDistant ? size * 0.7 : size}px`);
-    catkin.style.setProperty("--catkin-duration", `${duration}s`);
-    catkin.style.setProperty("--catkin-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
-    catkin.style.setProperty("--catkin-drift", `${drift}px`);
-    catkin.style.setProperty("--catkin-return", `${drift * -0.4}px`);
-    catkin.style.setProperty("--catkin-opacity", `${isDistant ? 0.54 : 0.78 + Math.random() * 0.2}`);
-    catkin.style.setProperty("--catkin-rotation", `${Math.random() * 360}deg`);
-    catkin.style.setProperty("--catkin-sway-duration", `${5 + Math.random() * 5}s`);
+    wutong.style.setProperty("--wutong-x", `${x}vw`);
+    wutong.style.setProperty("--wutong-size", `${isDistant ? size * 0.7 : size}px`);
+    wutong.style.setProperty("--wutong-duration", `${duration}s`);
+    wutong.style.setProperty("--wutong-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
+    wutong.style.setProperty("--wutong-drift", `${drift}px`);
+    wutong.style.setProperty("--wutong-return", `${drift * -0.4}px`);
+    wutong.style.setProperty("--wutong-opacity", `${isDistant ? 0.46 : 0.62 + Math.random() * 0.23}`);
+    wutong.style.setProperty("--wutong-rotation", `${Math.random() * 360}deg`);
+    wutong.style.setProperty("--wutong-sway-duration", `${4 + Math.random() * 4}s`);
 
-    catkinField.appendChild(catkin);
-    catkin.addEventListener("animationend", (event) => {
-      if (event.animationName === "catkin-fall") catkin.remove();
+    wutongField.appendChild(wutong);
+    wutong.addEventListener("animationend", (event) => {
+      if (event.animationName === "wutong-fall") wutong.remove();
     });
   }
 
-  function scheduleCatkin() {
-    const delay = mobileCatkins.matches ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
-    catkinTimer = window.setTimeout(() => {
-      spawnCatkin();
-      scheduleCatkin();
+  function scheduleWutong() {
+    const delay = mobileWutongs.matches ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
+    wutongTimer = window.setTimeout(() => {
+      spawnWutong();
+      scheduleWutong();
     }, delay);
   }
 
-  function syncCatkins() {
-    window.clearTimeout(catkinTimer);
-    if (!catkinField) return;
+  function syncWutongs() {
+    window.clearTimeout(wutongTimer);
+    if (!wutongField) return;
     if (reducedMotion.matches) {
-      catkinField.replaceChildren();
+      wutongField.replaceChildren();
       return;
     }
     // 缩屏立即限制数量；后台暂停补充；恢复后仍只有一个生成计时器。
-    [...catkinField.children].slice(catkinLimit()).forEach((catkin) => catkin.remove());
+    [...wutongField.children].slice(wutongLimit()).forEach((wutong) => wutong.remove());
     if (document.hidden) return;
-    const missing = catkinLimit() - catkinField.childElementCount;
-    for (let index = 0; index < missing; index += 1) spawnCatkin(true);
-    scheduleCatkin();
+    const missing = wutongLimit() - wutongField.childElementCount;
+    for (let index = 0; index < missing; index += 1) spawnWutong(true);
+    scheduleWutong();
   }
 
-  mobileCatkins.addEventListener("change", syncCatkins);
-  reducedMotion.addEventListener("change", syncCatkins);
-  document.addEventListener("visibilitychange", syncCatkins);
-  syncCatkins();
+  mobileWutongs.addEventListener("change", syncWutongs);
+  reducedMotion.addEventListener("change", syncWutongs);
+  document.addEventListener("visibilitychange", syncWutongs);
+  syncWutongs();
 })();
