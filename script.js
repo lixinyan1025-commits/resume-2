@@ -321,68 +321,94 @@
     navSections.forEach((section) => navObserver.observe(section));
   }
 
-  const sakuraField = document.querySelector(".sakura-field");
-  const mobileSakura = window.matchMedia("(max-width: 719px)");
-  let sakuraTimer;
-  const sakuraLimit = () => mobileSakura.matches ? 20 : 38;
+  const petalField = document.getElementById("petalField");
+  const petalContext = petalField?.getContext("2d");
+  const petalTints = ["255,183,197", "255,206,215", "253,232,226", "246,172,192", "255,224,232"];
+  let petals = [];
+  let petalFrame = 0;
+  let petalLast = 0;
 
-  function spawnSakura(initial = false) {
-    if (!sakuraField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
-    if (sakuraField.childElementCount >= sakuraLimit()) return;
+  const randomBetween = (minimum, maximum) => minimum + Math.random() * (maximum - minimum);
 
-    const sakura = document.createElement("i");
-    const isDistant = Math.random() < 0.2;
-    const isBlossom = Math.random() < 0.3;
-    const isPale = isBlossom && Math.random() < 0.48;
-    sakura.className = `floating-sakura${isBlossom ? " floating-sakura-blossom" : ""}${isPale ? " floating-sakura-pale" : ""}${isDistant ? " floating-sakura-distant" : ""}`;
-    const baseSize = isBlossom ? (mobileSakura.matches ? 19 : 23) : (mobileSakura.matches ? 13 : 16);
-    const size = baseSize + Math.random() * (isBlossom ? 12 : 9);
-    const duration = 15 + Math.random() * 10;
-    const drift = -120 + Math.random() * 240;
-    // 花瓣均匀穿过整个画面，允许短暂掠过文字，不只集中在两侧。
-    const x = 2 + Math.random() * 96;
-
-    sakura.style.setProperty("--sakura-x", `${x}vw`);
-    sakura.style.setProperty("--sakura-size", `${isDistant ? size * 0.72 : size}px`);
-    sakura.style.setProperty("--sakura-duration", `${duration}s`);
-    sakura.style.setProperty("--sakura-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
-    sakura.style.setProperty("--sakura-drift", `${drift}px`);
-    sakura.style.setProperty("--sakura-return", `${drift * -0.46}px`);
-    sakura.style.setProperty("--sakura-opacity", `${isDistant ? 0.44 : 0.64 + Math.random() * 0.22}`);
-    sakura.style.setProperty("--sakura-rotation", `${Math.random() * 360}deg`);
-    sakura.style.setProperty("--sakura-sway-duration", `${3.6 + Math.random() * 4.4}s`);
-
-    sakuraField.appendChild(sakura);
-    sakura.addEventListener("animationend", (event) => {
-      if (event.animationName === "sakura-fall") sakura.remove();
-    });
+  function createPetal(seed = false) {
+    const depth = randomBetween(0.42, 1);
+    return {
+      x: randomBetween(-40, window.innerWidth + 40),
+      y: seed ? randomBetween(-window.innerHeight, window.innerHeight) : randomBetween(-100, -20),
+      size: randomBetween(4.5, 13) * depth,
+      speedY: randomBetween(13, 40) * depth,
+      sway: randomBetween(12, 46),
+      swaySpeed: randomBetween(0.35, 1.1),
+      phase: randomBetween(0, Math.PI * 2),
+      rotation: randomBetween(0, Math.PI * 2),
+      rotationSpeed: randomBetween(-1.05, 1.05),
+      alpha: randomBetween(0.28, 0.78) * depth,
+      tint: petalTints[Math.floor(Math.random() * petalTints.length)],
+      flip: randomBetween(0.5, 1),
+    };
   }
 
-  function scheduleSakura() {
-    const delay = mobileSakura.matches ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
-    sakuraTimer = window.setTimeout(() => {
-      spawnSakura();
-      scheduleSakura();
-    }, delay);
+  function fitPetalField() {
+    if (!petalField || !petalContext || reducedMotion.matches) return;
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+    petalField.width = Math.round(window.innerWidth * pixelRatio);
+    petalField.height = Math.round(window.innerHeight * pixelRatio);
+    petalContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    const count = Math.round(window.innerWidth * window.innerHeight / 17000) + 24;
+    petals = Array.from({ length: count }, () => createPetal(true));
   }
 
-  function syncSakura() {
-    window.clearTimeout(sakuraTimer);
-    if (!sakuraField) return;
+  function drawPetals(timestamp) {
+    if (!petalContext || !petalField || reducedMotion.matches) return;
+    const delta = petalLast ? Math.min((timestamp - petalLast) / 1000, 0.05) : 0;
+    petalLast = timestamp;
+    const time = timestamp / 1000;
+    const wind = 24 * Math.sin(time * 0.12) + 13 * Math.sin(time * 0.35 + 1.1);
+    petalContext.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    for (const petal of petals) {
+      petal.y += petal.speedY * delta;
+      petal.x += (wind * 0.5 + Math.sin(time * petal.swaySpeed + petal.phase) * petal.sway) * delta;
+      petal.rotation += petal.rotationSpeed * delta;
+      if (petal.y - petal.size > window.innerHeight || petal.x < -80 || petal.x > window.innerWidth + 80) {
+        Object.assign(petal, createPetal());
+      }
+
+      petalContext.save();
+      petalContext.translate(petal.x, petal.y);
+      petalContext.rotate(petal.rotation);
+      petalContext.scale(Math.cos(time * petal.swaySpeed * 1.25 + petal.phase) * petal.flip, 1);
+      const gradient = petalContext.createLinearGradient(0, -petal.size, 0, petal.size);
+      gradient.addColorStop(0, `rgba(${petal.tint},${petal.alpha})`);
+      gradient.addColorStop(1, `rgba(${petal.tint},${petal.alpha * 0.32})`);
+      petalContext.fillStyle = gradient;
+      petalContext.beginPath();
+      petalContext.moveTo(0, -petal.size);
+      petalContext.bezierCurveTo(petal.size * 0.9, -petal.size * 0.48, petal.size * 0.64, petal.size * 0.74, 0, petal.size);
+      petalContext.fill();
+      petalContext.restore();
+    }
+    petalFrame = window.requestAnimationFrame(drawPetals);
+  }
+
+  function syncPetals() {
+    window.cancelAnimationFrame(petalFrame);
+    petalLast = 0;
+    if (!petalContext || !petalField) return;
+    petalContext.clearRect(0, 0, petalField.width, petalField.height);
     if (reducedMotion.matches) {
-      sakuraField.replaceChildren();
+      petals = [];
       return;
     }
-    // 缩屏立即限制数量；后台暂停补充；恢复后仍只有一个生成计时器。
-    [...sakuraField.children].slice(sakuraLimit()).forEach((sakura) => sakura.remove());
-    if (document.hidden) return;
-    const missing = sakuraLimit() - sakuraField.childElementCount;
-    for (let index = 0; index < missing; index += 1) spawnSakura(true);
-    scheduleSakura();
+    fitPetalField();
+    petalFrame = window.requestAnimationFrame(drawPetals);
   }
 
-  mobileSakura.addEventListener("change", syncSakura);
-  reducedMotion.addEventListener("change", syncSakura);
-  document.addEventListener("visibilitychange", syncSakura);
-  syncSakura();
+  let petalResizeTimer;
+  window.addEventListener("resize", () => {
+    window.clearTimeout(petalResizeTimer);
+    petalResizeTimer = window.setTimeout(syncPetals, 180);
+  });
+  reducedMotion.addEventListener("change", syncPetals);
+  syncPetals();
 })();
