@@ -321,66 +321,65 @@
     navSections.forEach((section) => navObserver.observe(section));
   }
 
-  const petalField = document.querySelector(".petal-field");
-  const mobilePetals = window.matchMedia("(max-width: 719px)");
-  let petalTimer;
-  const petalLimit = () => mobilePetals.matches ? 20 : 38;
+  const catkinField = document.querySelector(".catkin-field");
+  const mobileCatkins = window.matchMedia("(max-width: 719px)");
+  let catkinTimer;
+  const catkinLimit = () => mobileCatkins.matches ? 20 : 38;
 
-  function spawnPetal(initial = false) {
-    if (!petalField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
-    if (petalField.childElementCount >= petalLimit()) return;
+  function spawnCatkin(initial = false) {
+    if (!catkinField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
+    if (catkinField.childElementCount >= catkinLimit()) return;
 
-    const petal = document.createElement("i");
-    const isRose = Math.random() < 0.55;
+    const catkin = document.createElement("i");
     const isDistant = Math.random() < 0.2;
-    petal.className = `floating-petal${isRose ? " floating-petal-rose" : ""}${isDistant ? " floating-petal-distant" : ""}`;
-    const size = (mobilePetals.matches ? 10 : 12) + Math.random() * 9;
-    const duration = 14 + Math.random() * 9;
-    const drift = -65 + Math.random() * 130;
-    // 花瓣均匀穿过整个画面，允许短暂掠过文字，不只集中在两侧。
+    catkin.className = `floating-catkin${isDistant ? " floating-catkin-distant" : ""}`;
+    const size = (mobileCatkins.matches ? 16 : 18) + Math.random() * 12;
+    const duration = 18 + Math.random() * 12;
+    const drift = -100 + Math.random() * 200;
+    // 柳絮均匀穿过整个画面，允许短暂掠过文字，不只集中在两侧。
     const x = 2 + Math.random() * 96;
 
-    petal.style.setProperty("--petal-x", `${x}vw`);
-    petal.style.setProperty("--petal-size", `${isDistant ? size * 0.7 : size}px`);
-    petal.style.setProperty("--petal-duration", `${duration}s`);
-    petal.style.setProperty("--petal-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
-    petal.style.setProperty("--petal-drift", `${drift}px`);
-    petal.style.setProperty("--petal-return", `${drift * -0.4}px`);
-    petal.style.setProperty("--petal-opacity", `${isDistant ? 0.42 : 0.62 + Math.random() * 0.24}`);
-    petal.style.setProperty("--petal-rotation", `${Math.random() * 360}deg`);
-    petal.style.setProperty("--petal-turn-duration", `${5 + Math.random() * 5}s`);
+    catkin.style.setProperty("--catkin-x", `${x}vw`);
+    catkin.style.setProperty("--catkin-size", `${isDistant ? size * 0.7 : size}px`);
+    catkin.style.setProperty("--catkin-duration", `${duration}s`);
+    catkin.style.setProperty("--catkin-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
+    catkin.style.setProperty("--catkin-drift", `${drift}px`);
+    catkin.style.setProperty("--catkin-return", `${drift * -0.4}px`);
+    catkin.style.setProperty("--catkin-opacity", `${isDistant ? 0.54 : 0.78 + Math.random() * 0.2}`);
+    catkin.style.setProperty("--catkin-rotation", `${Math.random() * 360}deg`);
+    catkin.style.setProperty("--catkin-sway-duration", `${5 + Math.random() * 5}s`);
 
-    petalField.appendChild(petal);
-    petal.addEventListener("animationend", (event) => {
-      if (event.animationName === "petal-fall") petal.remove();
+    catkinField.appendChild(catkin);
+    catkin.addEventListener("animationend", (event) => {
+      if (event.animationName === "catkin-fall") catkin.remove();
     });
   }
 
-  function schedulePetal() {
-    const delay = mobilePetals.matches ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
-    petalTimer = window.setTimeout(() => {
-      spawnPetal();
-      schedulePetal();
+  function scheduleCatkin() {
+    const delay = mobileCatkins.matches ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
+    catkinTimer = window.setTimeout(() => {
+      spawnCatkin();
+      scheduleCatkin();
     }, delay);
   }
 
-  function syncPetals() {
-    window.clearTimeout(petalTimer);
-    if (!petalField) return;
+  function syncCatkins() {
+    window.clearTimeout(catkinTimer);
+    if (!catkinField) return;
     if (reducedMotion.matches) {
-      petalField.replaceChildren();
+      catkinField.replaceChildren();
       return;
     }
     // 缩屏立即限制数量；后台暂停补充；恢复后仍只有一个生成计时器。
-    [...petalField.children].slice(petalLimit()).forEach((petal) => petal.remove());
+    [...catkinField.children].slice(catkinLimit()).forEach((catkin) => catkin.remove());
     if (document.hidden) return;
-    const missing = petalLimit() - petalField.childElementCount;
-    for (let index = 0; index < missing; index += 1) spawnPetal(true);
-    schedulePetal();
+    const missing = catkinLimit() - catkinField.childElementCount;
+    for (let index = 0; index < missing; index += 1) spawnCatkin(true);
+    scheduleCatkin();
   }
 
-  mobilePetals.addEventListener("change", syncPetals);
-  reducedMotion.addEventListener("change", syncPetals);
-  document.addEventListener("visibilitychange", syncPetals);
-  syncPetals();
+  mobileCatkins.addEventListener("change", syncCatkins);
+  reducedMotion.addEventListener("change", syncCatkins);
+  document.addEventListener("visibilitychange", syncCatkins);
+  syncCatkins();
 })();
