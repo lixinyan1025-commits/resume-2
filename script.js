@@ -321,66 +321,66 @@
     navSections.forEach((section) => navObserver.observe(section));
   }
 
-  const leafField = document.querySelector(".leaf-field");
-  let liveLeaves = 0;
-  const mobileLeaves = window.matchMedia("(max-width: 719px)");
+  const petalField = document.querySelector(".petal-field");
+  const mobilePetals = window.matchMedia("(max-width: 719px)");
+  let petalTimer;
+  const petalLimit = () => mobilePetals.matches ? 20 : 38;
 
-  // 旋转设备或缩窄窗口后立即回落到手机上限，不留下桌面端的数量。
-  mobileLeaves.addEventListener("change", () => {
-    if (!leafField) return;
-    const maximum = mobileLeaves.matches ? 20 : 38;
-    [...leafField.children].slice(maximum).forEach((leaf) => leaf.remove());
-    liveLeaves = leafField.childElementCount;
-  });
+  function spawnPetal(initial = false) {
+    if (!petalField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
+    if (petalField.childElementCount >= petalLimit()) return;
 
-  function spawnLeaf(initial = false) {
-    if (!leafField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
-    const isMobile = mobileLeaves.matches;
-    const maximum = isMobile ? 20 : 38;
-    if (liveLeaves >= maximum) return;
+    const petal = document.createElement("i");
+    const isRose = Math.random() < 0.55;
+    const isDistant = Math.random() < 0.2;
+    petal.className = `floating-petal${isRose ? " floating-petal-rose" : ""}${isDistant ? " floating-petal-distant" : ""}`;
+    const size = (mobilePetals.matches ? 10 : 12) + Math.random() * 9;
+    const duration = 14 + Math.random() * 9;
+    const drift = -65 + Math.random() * 130;
+    // 花瓣均匀穿过整个画面，允许短暂掠过文字，不只集中在两侧。
+    const x = 2 + Math.random() * 96;
 
-    const leaf = document.createElement("i");
-    const isGolden = Math.random() < 0.3;
-    leaf.className = `floating-leaf ${isGolden ? "floating-leaf-gold" : "floating-leaf-bamboo"}`;
-    const size = 10 + Math.random() * 15;
-    const duration = 9 + Math.random() * 7;
-    const drift = -100 + Math.random() * 200;
-    const usesGutter = Math.random() < 0.7;
-    const startsLeft = Math.random() < 0.5;
-    const x = usesGutter
-      ? (startsLeft ? Math.random() * 18 : 82 + Math.random() * 18)
-      : 18 + Math.random() * 64;
+    petal.style.setProperty("--petal-x", `${x}vw`);
+    petal.style.setProperty("--petal-size", `${isDistant ? size * 0.7 : size}px`);
+    petal.style.setProperty("--petal-duration", `${duration}s`);
+    petal.style.setProperty("--petal-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
+    petal.style.setProperty("--petal-drift", `${drift}px`);
+    petal.style.setProperty("--petal-return", `${drift * -0.4}px`);
+    petal.style.setProperty("--petal-opacity", `${isDistant ? 0.42 : 0.62 + Math.random() * 0.24}`);
+    petal.style.setProperty("--petal-rotation", `${Math.random() * 360}deg`);
+    petal.style.setProperty("--petal-turn-duration", `${5 + Math.random() * 5}s`);
 
-    leaf.style.setProperty("--leaf-x", `${x}vw`);
-    leaf.style.setProperty("--leaf-size", `${size}px`);
-    leaf.style.setProperty("--leaf-duration", `${duration}s`);
-    leaf.style.setProperty("--leaf-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
-    leaf.style.setProperty("--leaf-drift", `${drift}px`);
-    leaf.style.setProperty("--leaf-return", `${drift * -0.45}px`);
-    leaf.style.setProperty("--leaf-opacity", `${0.5 + Math.random() * 0.3}`);
-
-    leafField.appendChild(leaf);
-    liveLeaves += 1;
-    leaf.addEventListener("animationend", () => {
-      leaf.remove();
-      liveLeaves -= 1;
-    }, { once: true });
+    petalField.appendChild(petal);
+    petal.addEventListener("animationend", (event) => {
+      if (event.animationName === "petal-fall") petal.remove();
+    });
   }
 
-  if (!reducedMotion.matches) {
-    // 同时增加首屏数量与补充频率，避免只提高上限却看不到更多落叶。
-    const initialCount = mobileLeaves.matches ? 20 : 38;
-    for (let index = 0; index < initialCount; index += 1) spawnLeaf(true);
+  function schedulePetal() {
+    const delay = mobilePetals.matches ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
+    petalTimer = window.setTimeout(() => {
+      spawnPetal();
+      schedulePetal();
+    }, delay);
+  }
 
-    function scheduleLeaf() {
-      const isMobile = mobileLeaves.matches;
-      const delay = isMobile ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
-      window.setTimeout(() => {
-        spawnLeaf(false);
-        scheduleLeaf();
-      }, delay);
+  function syncPetals() {
+    window.clearTimeout(petalTimer);
+    if (!petalField) return;
+    if (reducedMotion.matches) {
+      petalField.replaceChildren();
+      return;
     }
-
-    scheduleLeaf();
+    // 缩屏立即限制数量；后台暂停补充；恢复后仍只有一个生成计时器。
+    [...petalField.children].slice(petalLimit()).forEach((petal) => petal.remove());
+    if (document.hidden) return;
+    const missing = petalLimit() - petalField.childElementCount;
+    for (let index = 0; index < missing; index += 1) spawnPetal(true);
+    schedulePetal();
   }
+
+  mobilePetals.addEventListener("change", syncPetals);
+  reducedMotion.addEventListener("change", syncPetals);
+  document.addEventListener("visibilitychange", syncPetals);
+  syncPetals();
 })();
