@@ -321,66 +321,68 @@
     navSections.forEach((section) => navObserver.observe(section));
   }
 
-  const wutongField = document.querySelector(".wutong-field");
-  const mobileWutongs = window.matchMedia("(max-width: 719px)");
-  let wutongTimer;
-  const wutongLimit = () => mobileWutongs.matches ? 20 : 38;
+  const sakuraField = document.querySelector(".sakura-field");
+  const mobileSakura = window.matchMedia("(max-width: 719px)");
+  let sakuraTimer;
+  const sakuraLimit = () => mobileSakura.matches ? 20 : 38;
 
-  function spawnWutong(initial = false) {
-    if (!wutongField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
-    if (wutongField.childElementCount >= wutongLimit()) return;
+  function spawnSakura(initial = false) {
+    if (!sakuraField || reducedMotion.matches || document.hidden || body.classList.contains("night-section-in-view")) return;
+    if (sakuraField.childElementCount >= sakuraLimit()) return;
 
-    const wutong = document.createElement("i");
-    const isDistant = Math.random() < 0.18;
-    const isGolden = Math.random() < 0.58;
-    wutong.className = `floating-wutong${isGolden ? " floating-wutong-gold" : ""}${isDistant ? " floating-wutong-distant" : ""}`;
-    const size = (mobileWutongs.matches ? 24 : 30) + Math.random() * 16;
-    const duration = 14 + Math.random() * 9;
-    const drift = -100 + Math.random() * 200;
-    // 梧桐叶均匀穿过整个画面，允许短暂掠过文字，不只集中在两侧。
+    const sakura = document.createElement("i");
+    const isDistant = Math.random() < 0.2;
+    const isBlossom = Math.random() < 0.3;
+    const isPale = isBlossom && Math.random() < 0.48;
+    sakura.className = `floating-sakura${isBlossom ? " floating-sakura-blossom" : ""}${isPale ? " floating-sakura-pale" : ""}${isDistant ? " floating-sakura-distant" : ""}`;
+    const baseSize = isBlossom ? (mobileSakura.matches ? 19 : 23) : (mobileSakura.matches ? 13 : 16);
+    const size = baseSize + Math.random() * (isBlossom ? 12 : 9);
+    const duration = 15 + Math.random() * 10;
+    const drift = -120 + Math.random() * 240;
+    // 花瓣均匀穿过整个画面，允许短暂掠过文字，不只集中在两侧。
     const x = 2 + Math.random() * 96;
 
-    wutong.style.setProperty("--wutong-x", `${x}vw`);
-    wutong.style.setProperty("--wutong-size", `${isDistant ? size * 0.7 : size}px`);
-    wutong.style.setProperty("--wutong-duration", `${duration}s`);
-    wutong.style.setProperty("--wutong-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
-    wutong.style.setProperty("--wutong-drift", `${drift}px`);
-    wutong.style.setProperty("--wutong-return", `${drift * -0.4}px`);
-    wutong.style.setProperty("--wutong-opacity", `${isDistant ? 0.46 : 0.62 + Math.random() * 0.23}`);
-    wutong.style.setProperty("--wutong-rotation", `${Math.random() * 360}deg`);
-    wutong.style.setProperty("--wutong-sway-duration", `${4 + Math.random() * 4}s`);
+    sakura.style.setProperty("--sakura-x", `${x}vw`);
+    sakura.style.setProperty("--sakura-size", `${isDistant ? size * 0.72 : size}px`);
+    sakura.style.setProperty("--sakura-duration", `${duration}s`);
+    sakura.style.setProperty("--sakura-delay", initial ? `${-(Math.random() * duration)}s` : "0s");
+    sakura.style.setProperty("--sakura-drift", `${drift}px`);
+    sakura.style.setProperty("--sakura-return", `${drift * -0.46}px`);
+    sakura.style.setProperty("--sakura-opacity", `${isDistant ? 0.44 : 0.64 + Math.random() * 0.22}`);
+    sakura.style.setProperty("--sakura-rotation", `${Math.random() * 360}deg`);
+    sakura.style.setProperty("--sakura-sway-duration", `${3.6 + Math.random() * 4.4}s`);
 
-    wutongField.appendChild(wutong);
-    wutong.addEventListener("animationend", (event) => {
-      if (event.animationName === "wutong-fall") wutong.remove();
+    sakuraField.appendChild(sakura);
+    sakura.addEventListener("animationend", (event) => {
+      if (event.animationName === "sakura-fall") sakura.remove();
     });
   }
 
-  function scheduleWutong() {
-    const delay = mobileWutongs.matches ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
-    wutongTimer = window.setTimeout(() => {
-      spawnWutong();
-      scheduleWutong();
+  function scheduleSakura() {
+    const delay = mobileSakura.matches ? 420 + Math.random() * 140 : 240 + Math.random() * 100;
+    sakuraTimer = window.setTimeout(() => {
+      spawnSakura();
+      scheduleSakura();
     }, delay);
   }
 
-  function syncWutongs() {
-    window.clearTimeout(wutongTimer);
-    if (!wutongField) return;
+  function syncSakura() {
+    window.clearTimeout(sakuraTimer);
+    if (!sakuraField) return;
     if (reducedMotion.matches) {
-      wutongField.replaceChildren();
+      sakuraField.replaceChildren();
       return;
     }
     // 缩屏立即限制数量；后台暂停补充；恢复后仍只有一个生成计时器。
-    [...wutongField.children].slice(wutongLimit()).forEach((wutong) => wutong.remove());
+    [...sakuraField.children].slice(sakuraLimit()).forEach((sakura) => sakura.remove());
     if (document.hidden) return;
-    const missing = wutongLimit() - wutongField.childElementCount;
-    for (let index = 0; index < missing; index += 1) spawnWutong(true);
-    scheduleWutong();
+    const missing = sakuraLimit() - sakuraField.childElementCount;
+    for (let index = 0; index < missing; index += 1) spawnSakura(true);
+    scheduleSakura();
   }
 
-  mobileWutongs.addEventListener("change", syncWutongs);
-  reducedMotion.addEventListener("change", syncWutongs);
-  document.addEventListener("visibilitychange", syncWutongs);
-  syncWutongs();
+  mobileSakura.addEventListener("change", syncSakura);
+  reducedMotion.addEventListener("change", syncSakura);
+  document.addEventListener("visibilitychange", syncSakura);
+  syncSakura();
 })();

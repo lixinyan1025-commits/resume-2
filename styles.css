@@ -1607,7 +1607,7 @@ body.has-scrolled .site-header {
   font-size: 0.76rem;
 }
 
-.wutong-field {
+.sakura-field {
   position: fixed;
   inset: 0;
   z-index: 40;
@@ -1629,45 +1629,47 @@ body.has-scrolled .site-header {
   margin: 0 0.16em;
 }
 
-body.night-section-in-view .wutong-field { opacity: 0; }
+body.night-section-in-view .sakura-field { opacity: 0; }
 
-.floating-wutong {
+.floating-sakura {
   position: absolute;
   top: -40px;
-  left: var(--wutong-x);
-  width: var(--wutong-size);
-  height: calc(var(--wutong-size) * 1.15);
+  left: var(--sakura-x);
+  width: var(--sakura-size);
+  height: calc(var(--sakura-size) * 1.24);
   opacity: 0;
-  animation: wutong-fall var(--wutong-duration) linear var(--wutong-delay) forwards;
+  animation: sakura-fall var(--sakura-duration) linear var(--sakura-delay) forwards;
   will-change: transform, opacity;
 }
 
-.floating-wutong::before {
+.floating-sakura::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: url("assets/images/wutong-green.svg") center / contain no-repeat;
-  filter: drop-shadow(0 3px 3px rgba(47, 57, 33, 0.2));
-  animation: wutong-sway var(--wutong-sway-duration) ease-in-out var(--wutong-delay) infinite alternate;
+  background: url("assets/images/sakura-petal.svg") center / contain no-repeat;
+  filter: drop-shadow(0 2px 2px rgba(116, 55, 78, 0.16));
+  animation: sakura-sway var(--sakura-sway-duration) ease-in-out var(--sakura-delay) infinite alternate;
 }
 
-.floating-wutong-gold::before { background-image: url("assets/images/wutong-gold.svg"); }
+.floating-sakura-blossom::before { background-image: url("assets/images/sakura-blossom.svg"); }
 
-.floating-wutong-distant::before { filter: blur(0.4px); }
+.floating-sakura-blossom.floating-sakura-pale::before { background-image: url("assets/images/sakura-blossom-pale.svg"); }
 
-@keyframes wutong-fall {
+.floating-sakura-distant::before { filter: blur(0.45px); }
+
+@keyframes sakura-fall {
   0% { opacity: 0; transform: translate3d(0, -40px, 0); }
-  8% { opacity: var(--wutong-opacity); }
-  35% { transform: translate3d(var(--wutong-drift), 34vh, 0); }
-  68% { transform: translate3d(var(--wutong-return), 70vh, 0); }
-  88% { opacity: var(--wutong-opacity); }
-  100% { opacity: 0; transform: translate3d(var(--wutong-drift), 108vh, 0); }
+  8% { opacity: var(--sakura-opacity); }
+  34% { transform: translate3d(var(--sakura-drift), 33vh, 0); }
+  66% { transform: translate3d(var(--sakura-return), 69vh, 0); }
+  90% { opacity: var(--sakura-opacity); }
+  100% { opacity: 0; transform: translate3d(var(--sakura-drift), 108vh, 0); }
 }
 
-@keyframes wutong-sway {
-  0% { transform: perspective(160px) rotate(var(--wutong-rotation)) rotateY(-28deg) rotateX(10deg); }
-  50% { transform: perspective(160px) rotate(calc(var(--wutong-rotation) + 42deg)) rotateY(52deg) rotateX(-18deg); }
-  100% { transform: perspective(160px) rotate(calc(var(--wutong-rotation) + 88deg)) rotateY(-16deg) rotateX(25deg); }
+@keyframes sakura-sway {
+  0% { transform: perspective(140px) rotate(var(--sakura-rotation)) rotateY(-34deg) rotateX(8deg); }
+  50% { transform: perspective(140px) rotate(calc(var(--sakura-rotation) + 76deg)) rotateY(48deg) rotateX(-22deg); }
+  100% { transform: perspective(140px) rotate(calc(var(--sakura-rotation) + 154deg)) rotateY(-20deg) rotateX(18deg); }
 }
 
 @media (max-width: 980px) {
@@ -1809,7 +1811,7 @@ body.night-section-in-view .wutong-field { opacity: 0; }
     transition-duration: 0.01ms !important;
   }
   .hero-video { display: none; }
-  .wutong-field { display: none; }
+  .sakura-field { display: none; }
   [data-reveal] { opacity: 1; transform: none; }
   .js [data-typewriter] { visibility: visible; }
 }
