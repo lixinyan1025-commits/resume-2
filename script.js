@@ -323,7 +323,7 @@
 
   const petalField = document.getElementById("petalField");
   const petalContext = petalField?.getContext("2d");
-  const petalTints = ["255,183,197", "255,206,215", "253,232,226", "246,172,192", "255,224,232"];
+  const petalTints = ["232,92,137", "244,118,157", "255,145,174", "217,76,124", "250,176,195"];
   let petals = [];
   let petalFrame = 0;
   let petalLast = 0;
@@ -331,20 +331,20 @@
   const randomBetween = (minimum, maximum) => minimum + Math.random() * (maximum - minimum);
 
   function createPetal(seed = false) {
-    const depth = randomBetween(0.42, 1);
+    const depth = randomBetween(0.48, 1.08);
     return {
       x: randomBetween(-40, window.innerWidth + 40),
       y: seed ? randomBetween(-window.innerHeight, window.innerHeight) : randomBetween(-100, -20),
-      size: randomBetween(4.5, 13) * depth,
-      speedY: randomBetween(13, 40) * depth,
-      sway: randomBetween(12, 46),
-      swaySpeed: randomBetween(0.35, 1.1),
+      size: randomBetween(7, 16) * depth,
+      speedY: randomBetween(11, 34) * depth,
+      sway: randomBetween(18, 58),
+      swaySpeed: randomBetween(0.28, 0.86),
       phase: randomBetween(0, Math.PI * 2),
       rotation: randomBetween(0, Math.PI * 2),
-      rotationSpeed: randomBetween(-1.05, 1.05),
-      alpha: randomBetween(0.28, 0.78) * depth,
+      rotationSpeed: randomBetween(-0.82, 0.82),
+      alpha: Math.min(0.92, randomBetween(0.56, 0.9) * depth),
       tint: petalTints[Math.floor(Math.random() * petalTints.length)],
-      flip: randomBetween(0.5, 1),
+      flip: randomBetween(0.62, 1),
     };
   }
 
@@ -354,7 +354,7 @@
     petalField.width = Math.round(window.innerWidth * pixelRatio);
     petalField.height = Math.round(window.innerHeight * pixelRatio);
     petalContext.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    const count = Math.round(window.innerWidth * window.innerHeight / 17000) + 24;
+    const count = Math.round(window.innerWidth * window.innerHeight / 23000) + 20;
     petals = Array.from({ length: count }, () => createPetal(true));
   }
 
@@ -363,7 +363,7 @@
     const delta = petalLast ? Math.min((timestamp - petalLast) / 1000, 0.05) : 0;
     petalLast = timestamp;
     const time = timestamp / 1000;
-    const wind = 24 * Math.sin(time * 0.12) + 13 * Math.sin(time * 0.35 + 1.1);
+    const wind = 28 * Math.sin(time * 0.1) + 16 * Math.sin(time * 0.29 + 1.1);
     petalContext.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
     for (const petal of petals) {
@@ -379,13 +379,23 @@
       petalContext.rotate(petal.rotation);
       petalContext.scale(Math.cos(time * petal.swaySpeed * 1.25 + petal.phase) * petal.flip, 1);
       const gradient = petalContext.createLinearGradient(0, -petal.size, 0, petal.size);
-      gradient.addColorStop(0, `rgba(${petal.tint},${petal.alpha})`);
-      gradient.addColorStop(1, `rgba(${petal.tint},${petal.alpha * 0.32})`);
+      gradient.addColorStop(0, `rgba(255,238,244,${petal.alpha * 0.92})`);
+      gradient.addColorStop(0.42, `rgba(${petal.tint},${petal.alpha})`);
+      gradient.addColorStop(1, `rgba(${petal.tint},${petal.alpha * 0.58})`);
       petalContext.fillStyle = gradient;
+      petalContext.strokeStyle = `rgba(166,53,96,${petal.alpha * 0.42})`;
+      petalContext.lineWidth = Math.max(0.45, petal.size * 0.055);
+      petalContext.shadowColor = `rgba(219,70,122,${petal.alpha * 0.28})`;
+      petalContext.shadowBlur = petal.size * 0.42;
       petalContext.beginPath();
-      petalContext.moveTo(0, -petal.size);
-      petalContext.bezierCurveTo(petal.size * 0.9, -petal.size * 0.48, petal.size * 0.64, petal.size * 0.74, 0, petal.size);
+      petalContext.moveTo(0, petal.size);
+      petalContext.bezierCurveTo(-petal.size * 0.76, petal.size * 0.52, -petal.size, -petal.size * 0.34, -petal.size * 0.28, -petal.size);
+      petalContext.quadraticCurveTo(0, -petal.size * 0.72, petal.size * 0.28, -petal.size);
+      petalContext.bezierCurveTo(petal.size, -petal.size * 0.34, petal.size * 0.76, petal.size * 0.52, 0, petal.size);
+      petalContext.closePath();
       petalContext.fill();
+      petalContext.shadowBlur = 0;
+      petalContext.stroke();
       petalContext.restore();
     }
     petalFrame = window.requestAnimationFrame(drawPetals);
