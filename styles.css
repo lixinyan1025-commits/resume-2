@@ -543,15 +543,12 @@ body.has-scrolled .site-header {
 .about-reading {
   max-width: 1040px;
   margin: 0 auto;
-  padding: clamp(28px, 6vw, 72px);
-  border: 1px solid rgba(255, 255, 255, 0.62);
-  border-radius: 36px;
-  background:
-    radial-gradient(circle at 88% 12%, rgba(129, 104, 158, 0.16), transparent 30rem),
-    radial-gradient(circle at 8% 72%, rgba(66, 132, 116, 0.15), transparent 34rem),
-    linear-gradient(145deg, rgba(242, 241, 231, 0.9), rgba(213, 228, 219, 0.86));
-  box-shadow: 0 34px 100px rgba(5, 25, 18, 0.28);
-  backdrop-filter: blur(22px) saturate(108%);
+  padding: clamp(18px, 3vw, 38px) clamp(8px, 2.4vw, 28px);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
 }
 
 .about-reading::after {
@@ -572,10 +569,11 @@ body.has-scrolled .site-header {
 }
 
 .about-copy {
-  color: #31483f;
+  color: rgba(244, 249, 244, 0.96);
   font-family: "Noto Serif SC", "Songti SC", serif;
   font-size: clamp(1.04rem, 1.42vw, 1.18rem);
   line-height: 2.02;
+  text-shadow: 0 2px 5px rgba(2, 12, 9, 0.96), 0 8px 26px rgba(2, 13, 10, 0.78);
 }
 
 .about-copy p {
@@ -585,28 +583,28 @@ body.has-scrolled .site-header {
 }
 
 .about-copy p:not(.about-lead):not(.about-reflection):not(.about-signoff):nth-child(4n + 2) {
-  color: #3f5d53;
-  background: linear-gradient(90deg, rgba(71, 133, 115, 0.13), transparent 78%);
+  color: #eefaf5;
+  background: none;
 }
 
 .about-copy p:not(.about-lead):not(.about-reflection):not(.about-signoff):nth-child(4n + 3) {
-  color: #54415f;
-  background: linear-gradient(90deg, rgba(120, 87, 137, 0.12), transparent 78%);
+  color: #f1e8fb;
+  background: none;
 }
 
 .about-copy p:not(.about-lead):not(.about-reflection):not(.about-signoff):nth-child(4n) {
-  color: #315664;
-  background: linear-gradient(90deg, rgba(70, 126, 145, 0.12), transparent 78%);
+  color: #e5f7ff;
+  background: none;
 }
 
 .about-copy p:not(.about-lead):not(.about-reflection):not(.about-signoff):nth-child(4n + 1) {
-  color: #5f4638;
-  background: linear-gradient(90deg, rgba(165, 119, 77, 0.11), transparent 78%);
+  color: #fff0dc;
+  background: none;
 }
 
 .about-copy .about-lead {
   margin-bottom: 1em;
-  color: var(--moss-deep);
+  color: #fff1c8;
   font-size: clamp(1.55rem, 2.5vw, 2.25rem);
   font-weight: 600;
   line-height: 1.6;
@@ -617,7 +615,9 @@ body.has-scrolled .site-header {
 
 .about-copy .about-reflection {
   margin: 1.7em 0;
-  color: #6e5866;
+  padding-left: 1.2em;
+  border-left: 2px solid rgba(184, 218, 255, 0.72);
+  color: #e8dcff;
   font-size: 1.08em;
   line-height: 1.9;
 }
@@ -625,10 +625,11 @@ body.has-scrolled .site-header {
 .about-copy .about-signoff {
   clear: both;
   margin: 2em 0 0;
-  padding: 24px 28px;
-  border-radius: 18px;
-  color: #365d50;
-  background: linear-gradient(110deg, rgba(121, 163, 145, 0.12), rgba(228, 207, 194, 0.18));
+  padding: 24px 0 0;
+  border-top: 1px solid rgba(232, 241, 224, 0.42);
+  border-radius: 0;
+  color: #e9f6d8;
+  background: transparent;
   font-size: 1.05em;
   line-height: 1.9;
   text-align: left;
@@ -641,8 +642,8 @@ body.has-scrolled .site-header {
   isolation: isolate;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(235, 242, 236, 0.91), rgba(218, 232, 224, 0.8) 54%, rgba(208, 225, 218, 0.88)),
-    url("assets/images/interest-mist.jpg") center / cover fixed no-repeat;
+    linear-gradient(180deg, rgba(3, 8, 23, 0.82), rgba(5, 12, 32, 0.72) 54%, rgba(5, 18, 34, 0.86)),
+    url("assets/images/cosmic-clean/cosmic-190.png") center 42% / cover fixed no-repeat;
 }
 
 .section-interests::before {
@@ -651,9 +652,9 @@ body.has-scrolled .site-header {
   inset: 0;
   z-index: 0;
   background:
-    linear-gradient(180deg, rgba(8, 31, 25, 0.32), transparent 150px),
-    radial-gradient(circle at 8% 20%, rgba(92, 78, 142, 0.13), transparent 30rem),
-    radial-gradient(circle at 90% 74%, rgba(25, 111, 102, 0.14), transparent 34rem);
+    linear-gradient(180deg, rgba(2, 6, 20, 0.72), transparent 190px),
+    radial-gradient(circle at 8% 20%, rgba(86, 124, 255, 0.18), transparent 30rem),
+    radial-gradient(circle at 90% 74%, rgba(27, 219, 207, 0.13), transparent 34rem);
   pointer-events: none;
 }
 
@@ -665,14 +666,14 @@ body.has-scrolled .site-header {
   left: 0;
   z-index: 0;
   height: 150px;
-  background: linear-gradient(0deg, rgba(7, 59, 63, 0.92), transparent);
+  background: linear-gradient(0deg, rgba(3, 13, 31, 0.96), transparent);
   pointer-events: none;
 }
 
-.section-interests .section-heading h2 { color: #173f37; text-shadow: 0 2px 18px rgba(255, 255, 255, 0.5); }
+.section-interests .section-heading h2 { color: #f4f8ff; text-shadow: 0 4px 28px rgba(25, 94, 255, 0.32); }
 .section-interests .section-heading { max-width: 980px; }
-.section-interests .section-index { color: #225e52; border-color: rgba(25, 92, 79, 0.2); background: rgba(250, 252, 247, 0.7); }
-.section-interests .section-index::before { background: linear-gradient(90deg, #2a7465, #8a6d9e, #bd8a52); }
+.section-interests .section-index { color: #8fe9ff; border-color: rgba(129, 223, 255, 0.28); background: rgba(6, 18, 42, 0.42); }
+.section-interests .section-index::before { background: linear-gradient(90deg, #48d9ef, #8a82ff, #d59bf5); }
 
 .interest-grid {
   position: relative;
@@ -684,19 +685,19 @@ body.has-scrolled .site-header {
 .interest-card {
   --card-accent: var(--moss);
   --card-soft: rgba(49, 94, 80, 0.11);
-  --card-bg-start: rgba(226, 238, 231, 0.94);
-  --card-bg-end: rgba(208, 226, 218, 0.88);
+  --card-bg-start: rgba(7, 18, 43, 0.48);
+  --card-bg-end: rgba(10, 26, 49, 0.3);
   position: relative;
   min-height: 242px;
   padding: 26px;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--card-accent) 30%, white);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 38%, rgba(255, 255, 255, 0.36));
   border-radius: 24px;
   background:
     radial-gradient(circle at 104% -8%, var(--card-soft), transparent 46%),
     linear-gradient(145deg, var(--card-bg-start), var(--card-bg-end));
-  box-shadow: 0 20px 54px rgba(21, 57, 48, 0.13);
-  backdrop-filter: blur(18px) saturate(112%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 22px 58px rgba(0, 5, 18, 0.28);
+  backdrop-filter: blur(13px) saturate(124%);
   transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
 }
 
@@ -727,7 +728,7 @@ body.has-scrolled .site-header {
 
 .interest-card p {
   margin: 0;
-  color: #425950;
+  color: rgba(229, 238, 250, 0.9);
   font-size: 0.94rem;
   line-height: 1.75;
 }
@@ -735,7 +736,7 @@ body.has-scrolled .site-header {
 .interest-card small {
   display: block;
   margin-top: 18px;
-  color: color-mix(in srgb, var(--card-accent) 78%, #53615c);
+  color: color-mix(in srgb, var(--card-accent) 72%, white);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.1em;
@@ -753,20 +754,20 @@ body.has-scrolled .site-header {
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--card-accent) 18%, transparent);
 }
 
-.interest-psychology { --card-accent: #216a58; --card-soft: rgba(33, 106, 88, 0.2); --card-bg-start: rgba(218, 238, 226, 0.83); --card-bg-end: rgba(195, 222, 211, 0.74); }
-.interest-ai { grid-column: span 3; --card-accent: #655aa2; --card-soft: rgba(101, 90, 162, 0.22); --card-bg-start: rgba(231, 226, 244, 0.84); --card-bg-end: rgba(205, 220, 229, 0.74); }
-.interest-game { --card-accent: #356f98; --card-soft: rgba(53, 111, 152, 0.2); --card-bg-start: rgba(217, 234, 242, 0.83); --card-bg-end: rgba(196, 220, 230, 0.74); }
-.interest-film { --card-accent: #a95872; --card-soft: rgba(169, 88, 114, 0.2); --card-bg-start: rgba(243, 224, 229, 0.83); --card-bg-end: rgba(228, 207, 214, 0.74); }
-.interest-reading { --card-accent: #75613d; --card-soft: rgba(117, 97, 61, 0.2); --card-bg-start: rgba(239, 232, 210, 0.83); --card-bg-end: rgba(220, 220, 199, 0.74); }
-.interest-music { --card-accent: #795789; --card-soft: rgba(121, 87, 137, 0.2); --card-bg-start: rgba(235, 224, 239, 0.83); --card-bg-end: rgba(214, 207, 227, 0.74); }
-.interest-sport { --card-accent: #2d7772; --card-soft: rgba(45, 119, 114, 0.2); --card-bg-start: rgba(213, 235, 230, 0.83); --card-bg-end: rgba(193, 220, 217, 0.74); }
+.interest-psychology { --card-accent: #72e5c1; --card-soft: rgba(57, 218, 178, 0.16); }
+.interest-ai { grid-column: span 3; --card-accent: #a8a2ff; --card-soft: rgba(135, 124, 255, 0.18); }
+.interest-game { --card-accent: #79ceff; --card-soft: rgba(65, 183, 255, 0.17); }
+.interest-film { --card-accent: #ffa6cb; --card-soft: rgba(242, 116, 174, 0.16); }
+.interest-reading { --card-accent: #f0ca82; --card-soft: rgba(229, 179, 88, 0.16); }
+.interest-music { --card-accent: #d9a2ff; --card-soft: rgba(191, 112, 239, 0.16); }
+.interest-sport { --card-accent: #76e2e9; --card-soft: rgba(68, 204, 213, 0.16); }
 
 .section-works {
   isolation: isolate;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgba(4, 57, 63, 0.83), rgba(7, 48, 54, 0.9) 52%, rgba(14, 50, 53, 0.86)),
-    url("assets/images/works-water.jpg") center / cover fixed no-repeat;
+    linear-gradient(180deg, rgba(4, 12, 27, 0.82), rgba(6, 17, 34, 0.88) 52%, rgba(11, 19, 38, 0.86)),
+    url("assets/images/cosmic-clean/cosmic-191.png") center / cover fixed no-repeat;
 }
 
 .section-works::before {
@@ -777,7 +778,7 @@ body.has-scrolled .site-header {
   left: 0;
   z-index: 0;
   height: 170px;
-  background: linear-gradient(180deg, rgba(7, 59, 63, 0.96), transparent);
+  background: linear-gradient(180deg, rgba(3, 13, 31, 0.98), transparent);
   pointer-events: none;
 }
 
@@ -789,7 +790,7 @@ body.has-scrolled .site-header {
   left: 0;
   z-index: 0;
   height: 180px;
-  background: linear-gradient(0deg, rgba(181, 139, 93, 0.86), transparent);
+  background: linear-gradient(0deg, rgba(28, 20, 48, 0.9), transparent);
   pointer-events: none;
 }
 
@@ -1148,8 +1149,8 @@ body.has-scrolled .site-header {
   isolation: isolate;
   color: rgba(237, 241, 235, 0.9);
   background:
-    linear-gradient(180deg, rgba(34, 58, 58, 0.9), rgba(42, 45, 58, 0.9) 56%, rgba(25, 27, 45, 0.94)),
-    url("assets/images/learning-light.jpg") center / cover fixed no-repeat;
+    linear-gradient(180deg, rgba(5, 13, 34, 0.82), rgba(12, 20, 46, 0.86) 56%, rgba(13, 15, 39, 0.94)),
+    url("assets/images/cosmic-clean/cosmic-195.png") center 44% / cover fixed no-repeat;
 }
 
 .section-learning::before,
@@ -1165,7 +1166,7 @@ body.has-scrolled .site-header {
 .section-learning::before {
   top: 0;
   height: 170px;
-  background: linear-gradient(180deg, rgba(16, 51, 55, 0.84), transparent);
+  background: linear-gradient(180deg, rgba(4, 14, 35, 0.9), transparent);
 }
 
 .section-learning::after {
@@ -1198,7 +1199,7 @@ body.has-scrolled .site-header {
   border: 1px solid rgba(213, 195, 154, 0.26);
   border-radius: 18px;
   color: rgba(239, 240, 232, 0.92);
-  background: linear-gradient(150deg, rgba(29, 55, 56, 0.78), rgba(42, 40, 54, 0.72));
+  background: linear-gradient(150deg, rgba(8, 24, 47, 0.54), rgba(27, 22, 52, 0.48));
   box-shadow: 0 22px 58px rgba(8, 17, 24, 0.24);
   backdrop-filter: blur(16px);
   text-align: left;
